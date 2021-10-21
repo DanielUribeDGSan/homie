@@ -50,12 +50,18 @@
     height: auto;
 }
 
+.bg-primary {
+    background: var(--primario) !important;
+}
+
 .section {
     padding: 6rem 0rem;
 }
-main section:first-child,
+main section:first-child {
+    padding: 4rem 0rem 6rem 0rem;
+}
 main section:last-child {
-    padding: 4rem 0rem;
+    padding: 6rem 0rem 4rem 0rem;
 }
 
 .btn-yellow {
@@ -66,7 +72,16 @@ main section:last-child {
     border-radius: 30px;
 }
 
-.btn-yellow:hover {
+.btn-orange {
+    background: var(--naranja);
+    color: var(--blanco);
+    font-size: 1.3rem !important;
+    padding: 0.6rem 2.5rem;
+    border-radius: 30px;
+}
+
+.btn-yellow:hover,
+.btn-orange:hover {
     color: var(--blanco);
 }
 
@@ -97,5 +112,10 @@ main section:last-child {
 @media (max-width: 991px) {
     .pt-6 {
         padding-top: 4rem;
+    }
+}
+@media (max-width: 991px) {
+    .text-center-md {
+        text-align: center;
     }
 }

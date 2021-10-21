@@ -11,19 +11,22 @@
     position: relative;
 }
 
-.logo a img {
+.logo a img,
+.footer-about .footer-logo a img {
     max-width: 100%;
     width: 11vw;
 }
 
 @media (max-width: 991px) {
-    .logo a img {
+    .logo a img,
+    .footer-about .footer-logo a img {
         width: 22vw;
     }
 }
 
 @media (max-width: 767px) {
-    .logo a img {
+    .logo a img,
+    .footer-about .footer-logo a img {
         width: 35vw;
     }
 }
@@ -50,10 +53,25 @@
     border-radius: 50%;
     border: 3px solid var(--naranja);
 }
+@media (max-width: 767px) {
+    .home__circle {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 3px solid var(--naranja);
+    }
+}
+
 .home__card {
     border-radius: 2rem;
     min-height: 20rem;
 }
+@media (max-width: 767px) {
+    .home__card {
+        min-height: 17rem;
+    }
+}
+
 .home__img-card {
     width: 6vw;
 }
@@ -64,6 +82,34 @@
 }
 @media (max-width: 767px) {
     .home__img-card {
-        width: 19vw;
+        width: 15vw;
     }
+}
+
+.home__img-broker {
+    height: 75vh;
+}
+@media (max-width: 991px) {
+    .home__img-broker {
+        height: 45vh;
+    }
+}
+@media (max-width: 767px) {
+    .home__img-broker {
+        height: 100vh;
+    }
+}
+.line-form {
+    height: 100%;
+    color: transparent;
+    border-right: 1px solid var(--text-color);
+}
+@media (max-width: 991px) {
+    .home__img-beneficios-brokers {
+        width: 30vw;
+    }
+}
+
+.footer__espacio-text {
+    margin-top: 1rem;
 }
