@@ -1,0 +1,101 @@
+.fw-100 {
+    font-weight: 100;
+}
+
+.fw-200 {
+    font-weight: 200;
+}
+
+.fw-300 {
+    font-weight: 300;
+}
+
+.fw-400 {
+    font-weight: 400;
+}
+
+.fw-400 {
+    font-weight: 400;
+}
+
+.fw-500 {
+    font-weight: 500;
+}
+
+.fw-600 {
+    font-weight: 600;
+}
+
+.fw-700 {
+    font-weight: 700;
+}
+
+.text-primary {
+    color: var(--primario) !important;
+}
+
+.text-secundary {
+    color: var(--secundario) !important;
+}
+
+.text-orange {
+    color: var(--naranja) !important;
+}
+
+.bg-image {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    height: auto;
+}
+
+.section {
+    padding: 6rem 0rem;
+}
+main section:first-child,
+main section:last-child {
+    padding: 4rem 0rem;
+}
+
+.btn-yellow {
+    background: var(--secundario);
+    color: var(--blanco);
+    font-size: 1rem !important;
+    padding: 0.6rem 2.5rem;
+    border-radius: 30px;
+}
+
+.btn-yellow:hover {
+    color: var(--blanco);
+}
+
+.bg-gris {
+    background: var(--bg-gris);
+}
+
+@media (min-width: 1200px) {
+    .ocultar-pc {
+        display: none !important;
+    }
+}
+
+@media (max-width: 991px) {
+    .ocultar-md {
+        display: none !important;
+    }
+}
+
+.card {
+    box-shadow: var(--sombra);
+    border: 0px;
+}
+
+.pt-6 {
+    padding-top: 6rem;
+}
+@media (max-width: 991px) {
+    .pt-6 {
+        padding-top: 4rem;
+    }
+}
