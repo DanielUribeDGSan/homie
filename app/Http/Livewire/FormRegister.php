@@ -3,9 +3,11 @@
 namespace App\Http\Livewire;
 
 use App\Mail\MailRegister;
+use App\Models\Transaction;
 use App\Models\User;
 use Livewire\Component;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 
 class FormRegister extends Component
 {
@@ -43,7 +45,8 @@ class FormRegister extends Component
             'name' => $this->createForm['name'],
             'phone' => $this->createForm['phone'],
             'email' => $this->createForm['email'],
-            'password' => bcrypt($this->createForm['password'])
+            'password' => bcrypt($this->createForm['password']),
+            'fase' => 1,
         ]);
 
         if ($this->createForm['type'] == '1') {
@@ -52,9 +55,27 @@ class FormRegister extends Component
             $user->assignRole('propietario');
         } else if ($this->createForm['type'] == '3') {
             $user->assignRole('arendatario');
-        }
+            Mail::to($this->createForm['email'])->send(new MailRegister($user, $this->createForm['password']));
+            Auth::login($user);
+            $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789';
 
-        Mail::to($this->createForm['email'])->send(new MailRegister($user, $this->createForm['password']));
+            $randomNumber = mt_rand(1000000, 9999999)
+                . mt_rand(1000000, 9999999)
+                . $characters[rand(0, strlen($characters) - 1)];
+
+            $userRegister = User::where('email', $this->createForm['email'])->first();
+
+            $transaction = str_shuffle(strval($userRegister->id) . strval($randomNumber));
+
+            Transaction::create(
+                [
+                    'transaction' => $transaction,
+                    'user_id' => $userRegister->id
+                ]
+            );
+
+            return redirect()->route('arendatario.datos_propietario', $transaction);
+        }
     }
 
     public function render()

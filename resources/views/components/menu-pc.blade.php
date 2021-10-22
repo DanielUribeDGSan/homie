@@ -3,13 +3,13 @@
         <div class="header-bottom sticky-bar">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-lg-3 col-md-6 col-6">
+                    <div class="col-lg-2 col-md-6 col-6">
                         <div class="logo">
                             <a class="link_ref" href="{{ route('home') }}"><img
                                     src="{{ asset('assets/images/logo/logo.svg') }}" alt="logo HOMIE"></a>
                         </div>
                     </div>
-                    <div class="col-lg-7 d-none d-lg-block d-flex justify-content-center">
+                    <div class="col-lg-8 d-none d-lg-block d-flex justify-content-center">
                         <div class="main-menu text-center">
                             <nav>
                                 <ul>
@@ -23,6 +23,12 @@
                                     </li>
                                     <li><a href="" class="link_ref">FAQ</a>
                                     </li>
+                                    @auth
+                                    @else
+                                        <li><a href="" class="link_ref">Login</a>
+                                        </li>
+                                    @endauth
+
                                 </ul>
                             </nav>
                         </div>
@@ -30,8 +36,17 @@
                     <div class="col-lg-2 col-md-6 col-6">
                         <div class="header-action-wrap">
                             <div class="header-action-style">
-                                <a class="btn btn-yellow link_ref ocultar-md" title="registrate"
-                                    href="{{ route('registro') }}">Registrate</a>
+                                @auth
+                                    <a class="btn btn-orange-sm ocultar-md" title="registrate"
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
+                                            class="fas fa-sign-out-alt"></i></a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        style="display: none;">
+                                        @csrf </form>
+                                @else
+                                    <a class="btn btn-yellow link_ref ocultar-md" title="registrate"
+                                        href="{{ route('registro') }}">Registrate</a>
+                                @endauth
                             </div>
 
                             <div class="header-action-style d-block d-lg-none">

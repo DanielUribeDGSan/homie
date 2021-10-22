@@ -17,8 +17,22 @@
                     </li>
                     <li><a href="" class="link_ref">FAQ</a>
                     </li>
+                    @auth
+                    @else
+                        <li><a href="" class="link_ref">Login</a>
+                        </li>
+                    @endauth
                     <li>
-                        <a class="btn btn-yellow link_ref ocultar-md" title="registrate" href="">Registrate</a>
+                        @auth
+                            <a class="btn btn-orange-sm ocultar-md" title="registrate"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
+                                    class="fas fa-sign-out-alt"></i></a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf </form>
+                        @else
+                            <a class="btn btn-yellow link_ref ocultar-md" title="registrate"
+                                href="{{ route('registro') }}">Registrate</a>
+                        @endauth
                     </li>
                 </ul>
             </div>

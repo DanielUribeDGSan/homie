@@ -15,4 +15,10 @@ class WebController extends Controller
     {
         return view('registro.registro');
     }
+
+    public function invitacion_propietario($transaccion)
+    {
+        $transaccion_user = $transaccion;
+        return view('invitaciones.invitacion-propietario', compact('transaccion_user'));
+    }
 }

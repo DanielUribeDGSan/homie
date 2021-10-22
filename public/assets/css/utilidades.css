@@ -76,7 +76,13 @@ main .section-registro {
     padding: 0.6rem 2.5rem;
     border-radius: 30px;
 }
-
+.btn-yellow-sm {
+    background: var(--secundario);
+    color: var(--blanco);
+    font-size: 1.1rem !important;
+    padding: 0.6rem 2.5rem;
+    border-radius: 30px;
+}
 .btn-orange {
     background: var(--naranja);
     color: var(--blanco);
@@ -94,19 +100,22 @@ main .section-registro {
 
 .btn-yellow:hover,
 .btn-orange:hover,
-.btn-orange-sm:hover {
+.btn-orange-sm:hover,
+.btn-yellow-sm:hover {
     color: var(--blanco);
 }
 
 .btn-yellow:focus,
 .btn-orange:focus,
-.btn-orange-sm:focus {
+.btn-orange-sm:focus,
+.btn-yellow-sm:focus {
     color: var(--blanco);
 }
 
 .btn-yellow::selection,
 .btn-orange::selection,
-.btn-orange-sm::selection {
+.btn-orange-sm::selection,
+.btn-yellow-sm::selection {
     color: var(--blanco);
 }
 

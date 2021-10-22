@@ -29,6 +29,7 @@ class User extends Authenticatable
         'email',
         'phone',
         'password',
+        'fase',
     ];
 
     /**
@@ -60,4 +61,9 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }
