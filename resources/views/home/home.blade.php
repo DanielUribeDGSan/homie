@@ -311,7 +311,7 @@
                         y
                         con la posibilidad de no pagar deposito</p>
                 </div>
-                <div class="col-12">
+                <div class="col-12 d-flex align-items-center justify-content-center">
                     <img class="img-fluid mt-4" src="{{ asset('assets/images/svg/ilustracion-3.svg') }}"
                         alt="ilustacion homie" />
                 </div>

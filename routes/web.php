@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/', [App\Http\Controllers\WebController::class, 'home'])->name('home');
+Route::get('/registro', [App\Http\Controllers\WebController::class, 'registro'])->name('registro');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

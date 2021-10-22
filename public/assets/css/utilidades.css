@@ -57,11 +57,16 @@
 .section {
     padding: 6rem 0rem;
 }
+
 main section:first-child {
     padding: 4rem 0rem 6rem 0rem;
 }
 main section:last-child {
     padding: 6rem 0rem 4rem 0rem;
+}
+
+main .section-registro {
+    padding: 2rem 0rem 2rem 0rem !important;
 }
 
 .btn-yellow {
@@ -79,16 +84,38 @@ main section:last-child {
     padding: 0.6rem 2.5rem;
     border-radius: 30px;
 }
+.btn-orange-sm {
+    background: var(--naranja);
+    color: var(--blanco);
+    font-size: 1.1rem !important;
+    padding: 0.6rem 2.5rem;
+    border-radius: 30px;
+}
 
 .btn-yellow:hover,
-.btn-orange:hover {
+.btn-orange:hover,
+.btn-orange-sm:hover {
+    color: var(--blanco);
+}
+
+.btn-yellow:focus,
+.btn-orange:focus,
+.btn-orange-sm:focus {
+    color: var(--blanco);
+}
+
+.btn-yellow::selection,
+.btn-orange::selection,
+.btn-orange-sm::selection {
     color: var(--blanco);
 }
 
 .bg-gris {
     background: var(--bg-gris);
 }
-
+.min-vh100 {
+    min-height: 100vh;
+}
 @media (min-width: 1200px) {
     .ocultar-pc {
         display: none !important;

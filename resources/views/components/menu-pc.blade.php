@@ -30,7 +30,8 @@
                     <div class="col-lg-2 col-md-6 col-6">
                         <div class="header-action-wrap">
                             <div class="header-action-style">
-                                <a class="btn btn-yellow link_ref ocultar-md" title="registrate" href="">Registrate</a>
+                                <a class="btn btn-yellow link_ref ocultar-md" title="registrate"
+                                    href="{{ route('registro') }}">Registrate</a>
                             </div>
 
                             <div class="header-action-style d-block d-lg-none">

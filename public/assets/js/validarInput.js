@@ -10,7 +10,11 @@ function onlyEmail(input) {
 }
 
 function onlyNum(input) {
-    var regex = /[^12345678910]/gi;;
+    var regex = /[^+12345678910]/gi;;
     input.value = input.value.replace(regex, "");
 }
 
+const validar_email = (email) => {
+    const regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    return regex.test(email) ? true : false;
+};

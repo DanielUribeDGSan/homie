@@ -10,4 +10,9 @@ class WebController extends Controller
     {
         return view('home.home');
     }
+
+    public function registro()
+    {
+        return view('registro.registro');
+    }
 }
