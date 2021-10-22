@@ -184,8 +184,10 @@
                             </span>
                             <small> Proceso 100% digital</small>
                         </p>
-
-                        <a class="btn btn-yellow-lg mt-5 link_ref" title="contratar" href="">Contratar</a>
+                        <div
+                            class="d-flex align-items-center justify-content-lg-start justify-content-md-center justify-content-center">
+                            <a class="btn btn-yellow-lg mt-5 link_ref" title="contratar" href="">Contratar</a>
+                        </div>
 
                     </div>
                 </div>
@@ -437,7 +439,10 @@
                             </span>
                             <small> Proceso 100% digital</small>
                         </p>
-                        <a class="btn btn-morado mt-5 link_ref" title="contratar" href="">Contratar</a>
+                        <div
+                            class="d-flex align-items-center justify-content-lg-start justify-content-md-center justify-content-center">
+                            <a class="btn btn-morado mt-5 link_ref" title="contratar" href="">Contratar</a>
+                        </div>
 
                     </div>
                 </div>
