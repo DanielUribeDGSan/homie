@@ -83,6 +83,13 @@ main .section-registro {
     padding: 0.6rem 2.5rem;
     border-radius: 30px;
 }
+.btn-yellow-lg {
+    background: var(--secundario);
+    color: var(--blanco);
+    font-size: 1.3rem !important;
+    padding: 0.6rem 2.5rem;
+    border-radius: 30px;
+}
 .btn-orange {
     background: var(--naranja);
     color: var(--blanco);
@@ -97,25 +104,38 @@ main .section-registro {
     padding: 0.6rem 2.5rem;
     border-radius: 30px;
 }
+.btn-morado {
+    background: var(--primario);
+    color: var(--blanco);
+    font-size: 1.3rem !important;
+    padding: 0.6rem 2.5rem;
+    border-radius: 30px;
+}
 
 .btn-yellow:hover,
 .btn-orange:hover,
 .btn-orange-sm:hover,
-.btn-yellow-sm:hover {
+.btn-yellow-sm:hover,
+.btn-yellow-lg:hover,
+.btn-morado:hover {
     color: var(--blanco);
 }
 
 .btn-yellow:focus,
 .btn-orange:focus,
 .btn-orange-sm:focus,
-.btn-yellow-sm:focus {
+.btn-yellow-sm:focus,
+.btn-yellow-lg:focus,
+.btn-morado:focus {
     color: var(--blanco);
 }
 
 .btn-yellow::selection,
 .btn-orange::selection,
 .btn-orange-sm::selection,
-.btn-yellow-sm::selection {
+.btn-yellow-sm::selection,
+.btn-yellow-lg::selection,
+.btn-morado::selection {
     color: var(--blanco);
 }
 

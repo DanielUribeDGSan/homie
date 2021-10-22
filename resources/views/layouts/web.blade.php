@@ -65,6 +65,7 @@
 
     <script src="{{ asset('assets/js/vendor/modernizr-3.11.2.min.js') }}"></script>
     <script src="{{ asset('assets/js/vendor/jquery-3.6.0.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js"></script>
 
 
 
@@ -212,7 +213,6 @@
     {{-- Alertas --}}
     {{-- <x-cookies-content /> --}}
 
-
     <script src="{{ asset('assets/js/vendor/jquery-migrate-3.3.2.min.js') }}"></script>
     <script src="{{ asset('assets/js/vendor/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/vendor/bootstrap.min.js') }}"></script>
@@ -236,6 +236,7 @@
     <script src="{{ asset('assets/js/loading.js') }}"></script>
     <script src="{{ asset('assets/js/validarInput.js') }}"></script>
     <script src="{{ asset('assets/js/validar-registro.js') }}"></script>
+    <script src="{{ asset('assets/js/scroll.js') }}"></script>
 
     <script src="{{ asset('assets/js/main.js?ver=1.0.6') }}"></script>
 

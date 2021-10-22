@@ -9,11 +9,11 @@
                 <ul>
                     <li><a href="{{ route('home') }}" class="link_ref">Inicio</a>
                     </li>
-                    <li><a href="" class="link_ref">Soy Broker</a>
+                    <li><a data-scroll href="{{ route('home') . '#broker' }}">Soy Broker</a>
                     </li>
-                    <li><a href="" class="link_ref">Soy Propietario</a>
+                    <li><a data-scroll href="{{ route('home') . '#propietario' }}">Soy Propietario</a>
                     </li>
-                    <li><a href="" class="link_ref">Quiero Rentar</a>
+                    <li><a data-scroll href="{{ route('home') . '#inquilino' }}">Quiero Rentar</a>
                     </li>
                     <li><a href="" class="link_ref">FAQ</a>
                     </li>

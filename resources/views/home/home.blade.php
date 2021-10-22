@@ -13,100 +13,9 @@
             <img class="img-fluid mt-lg mt-md-5 mt-5" src="{{ asset('assets/images/svg/ilustracion-1.svg') }}"
                 alt="ilustacion homie" />
         </div>
+        <div id="broker"></div>
     </section>
-    <section class="section bg-gris">
-        <div class="container">
-            <article>
-                <h1 class="text-orange text-center">¿Eres Propietario?</h1>
-                <h2 class="text-orange text-center fw-400 mt-3">Protegemos tu Patrimonio</h2>
-                <p class="mt-3 text-center fw-200">Olvídate de procesos engorrosos, con Respaldo
-                    Homie te proteges de
-                    cualquier
-                    incidencia</p>
-            </article>
-            <div class="row pt-6">
-                <div class="col-lg-3 col-md-6 col-6 mt-lg-0 mt-md-4 mt-4">
-                    <div class="card home__card">
-                        <div class="card-body d-flex align-items-center justify-content-center">
-                            <div class="h-auto">
-                                <div class="d-flex align-items-center justify-content-center">
-                                    <div class="home__circle d-flex align-items-center justify-content-center">
-                                        <img class="img-fluid home__img-card"
-                                            src="{{ asset('assets/images/svg/calendario.svg') }}"
-                                            alt="ilustacion homie" />
-                                    </div>
-                                </div>
-                                <p class="text-center mt-3">
-                                    Cubrimos hasta
-                                    12 meses de renta
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-6 mt-lg-0 mt-md-4 mt-4">
-                    <div class="card home__card">
-                        <div class="card-body d-flex align-items-center justify-content-center">
-                            <div class="h-auto">
-                                <div class="d-flex align-items-center justify-content-center">
-                                    <div class="home__circle d-flex align-items-center justify-content-center">
-                                        <img class="img-fluid home__img-card"
-                                            src="{{ asset('assets/images/svg/phone-home.svg') }}"
-                                            alt="ilustacion homie" />
-                                    </div>
-                                </div>
-                                <p class="text-center mt-3">
-                                    Garantizamos el
-                                    pago puntual
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-6 mt-lg-0 mt-md-4 mt-4">
-                    <div class="card home__card">
-                        <div class="card-body d-flex align-items-center justify-content-center">
-                            <div class="h-auto">
-                                <div class="d-flex align-items-center justify-content-center">
-                                    <div class="home__circle d-flex align-items-center justify-content-center">
-                                        <img class="img-fluid home__img-card"
-                                            src="{{ asset('assets/images/svg/firma-home.svg') }}"
-                                            alt="ilustacion homie" />
-                                    </div>
-                                </div>
-                                <p class="text-center mt-3">
-                                    Firma digital y
-                                    gastos legales
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-6 mt-lg-0 mt-md-4 mt-4">
-                    <div class="card home__card">
-                        <div class="card-body d-flex align-items-center justify-content-center">
-                            <div class="h-auto">
-                                <div class="d-flex align-items-center justify-content-center">
-                                    <div class="home__circle d-flex align-items-center justify-content-center">
-                                        <img class="img-fluid home__img-card"
-                                            src="{{ asset('assets/images/svg/lupa-home.svg') }}"
-                                            alt="ilustacion homie" />
-                                    </div>
-                                </div>
-                                <p class="text-center mt-3">
-                                    Investigamos
-                                    al inquilino
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 d-flex align-items-center justify-content-center pt-6">
-                    <a class="btn btn-orange link_ref" title="contratar" href="">Contratar</a>
-                </div>
-            </div>
-        </div>
-    </section>
+    {{-- Broker --}}
     <section class="section">
         <div class="container">
             <div class="row">
@@ -114,7 +23,7 @@
                     <img class="img-fluid home__img-broker" src="{{ asset('assets/images/svg/ilustracion-2.svg') }}"
                         alt="ilustacion homie" />
                 </div>
-                <div class="col-lg-6 col-md-6 col-12">
+                <div class="col-lg-6 col-md-6 col-12 d-flex align-items-center justify-content-center">
                     <article>
                         <h1 class="text-secundary text-lg-left text-center-md mt-lg-0 mt-md-5 mt-5">¿Eres
                             Broker?</h1>
@@ -275,6 +184,9 @@
                             </span>
                             <small> Proceso 100% digital</small>
                         </p>
+
+                        <a class="btn btn-yellow-lg mt-5 link_ref" title="contratar" href="">Contratar</a>
+
                     </div>
                 </div>
                 <div
@@ -284,7 +196,104 @@
                 </div>
             </div>
         </div>
+        <div id="propietario"></div>
     </section>
+    {{-- Propietario --}}
+    <section class="section">
+        <div class="container">
+            <article>
+                <h1 class="text-orange text-center">¿Eres Propietario?</h1>
+                <h2 class="text-orange text-center fw-400 mt-3">Protegemos tu Patrimonio</h2>
+                <p class="mt-3 text-center fw-200">Olvídate de procesos engorrosos, con Respaldo
+                    Homie te proteges de
+                    cualquier
+                    incidencia</p>
+            </article>
+            <div class="row pt-6">
+                <div class="col-lg-3 col-md-6 col-6 mt-lg-0 mt-md-4 mt-4">
+                    <div class="card home__card">
+                        <div class="card-body d-flex align-items-center justify-content-center">
+                            <div class="h-auto">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <div class="home__circle d-flex align-items-center justify-content-center">
+                                        <img class="img-fluid home__img-card"
+                                            src="{{ asset('assets/images/svg/calendario.svg') }}"
+                                            alt="ilustacion homie" />
+                                    </div>
+                                </div>
+                                <p class="text-center mt-3">
+                                    Cubrimos hasta
+                                    12 meses de renta
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-6 mt-lg-0 mt-md-4 mt-4">
+                    <div class="card home__card">
+                        <div class="card-body d-flex align-items-center justify-content-center">
+                            <div class="h-auto">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <div class="home__circle d-flex align-items-center justify-content-center">
+                                        <img class="img-fluid home__img-card"
+                                            src="{{ asset('assets/images/svg/phone-home.svg') }}"
+                                            alt="ilustacion homie" />
+                                    </div>
+                                </div>
+                                <p class="text-center mt-3">
+                                    Garantizamos el
+                                    pago puntual
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-6 mt-lg-0 mt-md-4 mt-4">
+                    <div class="card home__card">
+                        <div class="card-body d-flex align-items-center justify-content-center">
+                            <div class="h-auto">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <div class="home__circle d-flex align-items-center justify-content-center">
+                                        <img class="img-fluid home__img-card"
+                                            src="{{ asset('assets/images/svg/firma-home.svg') }}"
+                                            alt="ilustacion homie" />
+                                    </div>
+                                </div>
+                                <p class="text-center mt-3">
+                                    Firma digital y
+                                    gastos legales
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-6 mt-lg-0 mt-md-4 mt-4">
+                    <div class="card home__card">
+                        <div class="card-body d-flex align-items-center justify-content-center">
+                            <div class="h-auto">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <div class="home__circle d-flex align-items-center justify-content-center">
+                                        <img class="img-fluid home__img-card"
+                                            src="{{ asset('assets/images/svg/lupa-home.svg') }}"
+                                            alt="ilustacion homie" />
+                                    </div>
+                                </div>
+                                <p class="text-center mt-3">
+                                    Investigamos
+                                    al inquilino
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 d-flex align-items-center justify-content-center pt-6">
+                    <a class="btn btn-orange link_ref" title="contratar" href="">Contratar</a>
+                </div>
+            </div>
+        </div>
+        <div id="inquilino"></div>
+    </section>
+    {{-- Inquilino --}}
     <section class="section">
         <div class="container">
             <div class="row">
@@ -428,6 +437,8 @@
                             </span>
                             <small> Proceso 100% digital</small>
                         </p>
+                        <a class="btn btn-morado mt-5 link_ref" title="contratar" href="">Contratar</a>
+
                     </div>
                 </div>
                 <div

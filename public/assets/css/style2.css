@@ -87,7 +87,7 @@
 }
 
 .home__img-broker {
-    height: 75vh;
+    height: 28rem;
 }
 @media (max-width: 991px) {
     .home__img-broker {
