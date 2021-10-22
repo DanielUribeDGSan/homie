@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\Models\Guest;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -17,11 +18,12 @@ class MailInvitacionPropietario extends Mailable
      *
      * @return void
      */
-    public  $user;
+    public  $user, $arendatario;
 
-    public function __construct(Guest $user)
+    public function __construct(Guest $user, User $arendatario)
     {
         $this->user = $user;
+        $this->arendatario = $arendatario;
     }
 
 

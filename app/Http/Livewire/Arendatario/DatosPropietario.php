@@ -4,11 +4,11 @@ namespace App\Http\Livewire\Arendatario;
 
 use App\Mail\MailInvitacionPropietario;
 use App\Models\Guest;
-use App\Models\Owner;
+use App\Models\Transaction;
 use App\Models\User;
 use Livewire\Component;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Auth;
+
 
 class DatosPropietario extends Component
 {
@@ -25,7 +25,7 @@ class DatosPropietario extends Component
     protected $rules = [
         'createForm.name' => 'required|max:255',
         'createForm.phone' => 'required|max:20',
-        'createForm.email' => 'required|max:255|unique:guests,email',
+        'createForm.email' => 'required|max:255',
     ];
 
     protected $validationAttributes = [
@@ -39,13 +39,29 @@ class DatosPropietario extends Component
         $this->validate();
 
         $user = Guest::create([
-            'name' => $this->createForm['name'],
-            'phone' => $this->createForm['phone'],
-            'email' => $this->createForm['email'],
-            'transaction' => $this->transaccion_user,
+            'name' => trim(
+                $this->createForm['name']
+            ),
+            'phone' => trim(
+                $this->createForm['phone']
+            ),
+            'email' => trim(
+                $this->createForm['email']
+            ),
+            'transaction' => trim(
+                $this->transaccion_user
+            ),
         ]);
 
-        Mail::to($this->createForm['email'])->send(new MailInvitacionPropietario($user));
+
+        $transaction_user = Transaction::where('transaction', $this->transaccion_user)->first();
+        $arendatario = User::where('id', $transaction_user->user_id)->first();
+        $arendatario->update(
+            [
+                'fase' => 1,
+            ]
+        );
+        Mail::to($this->createForm['email'])->send(new MailInvitacionPropietario($user, $arendatario));
 
         return redirect()->route('arendatario.datos_personales');
     }

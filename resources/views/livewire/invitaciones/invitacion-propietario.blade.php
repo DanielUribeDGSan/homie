@@ -18,37 +18,28 @@
                     <span>{{ $errors->first('createForm.email') }}</span>
                 @endif
             </div>
-            <label for="phone" class="col-12 col-form-label fw-100 mt-2">Teléfono</label>
-            <div class="col-lg-12 col-md-12 col-12">
+            <div class="col-lg-6 col-md-6 col-12">
+                <label for="phone" class="col-form-label fw-100 mt-2">Teléfono</label>
                 <input type="text" class="form-input" id="phone" onkeyup="onlyNum(this)" maxlength="20"
                     wire:model.defer="createForm.phone" autocomplete="off">
                 @if ($errors->has('createForm.phone'))
                     <span>{{ $errors->first('createForm.phone') }}</span>
                 @endif
             </div>
-            <label for="password" class="col-12 col-form-label fw-100 mt-2">Contraseña</label>
-            <div class="col-lg-12 col-md-12 col-12">
-                <input type="password" class="form-input" id="password" onkeyup="onlyLetrasNum(this)"
-                    maxlength="255" wire:model.defer="createForm.password" autocomplete="off">
+            <div class="col-lg-6 col-md-6 col-12">
+                <label for="password" class="col-form-label fw-100 mt-2">Contraseña</label>
+                <input type="password" class="form-input" id="password" onkeyup="verPassword(this)" maxlength="255"
+                    wire:model.defer="createForm.password" autocomplete="off">
+                <small id="verPassword"></small>
                 @if ($errors->has('createForm.password'))
                     <span>{{ $errors->first('createForm.password') }}</span>
-                @endif
-            </div>
-            <label for="type" class="col-12 col-form-label fw-100 mt-2">Tipo de usuario</label>
-            <div class="col-lg-12 col-md-12 col-12">
-                <select class="form-input" id="type" wire:model.defer="createForm.type">
-                    <option value="2">Propietario</option>
-                </select>
-                @if ($errors->has('createForm.type'))
-                    <span>{{ $errors->first('createForm.type') }}</span>
                 @endif
             </div>
             <div class="col-12 mt-4">
                 <button type="submit" class="btn btn-orange-sm" wire:loading.attr="disabled"
                     wire:loading.remove>Registrarme</button>
                 <div wire:loading wire:loading.class="d-flex align-items-center">
-                    {{-- <x-loading /> --}}
-                    Validando...
+                    <x-loading />
                 </div>
             </div>
         </div>

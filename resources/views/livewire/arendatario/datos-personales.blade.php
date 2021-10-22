@@ -103,11 +103,10 @@
                 @endif
             </div>
             <div class="col-6 mt-5">
-                <button type="submit" class="btn btn-yellow-sm" wire:loading.attr="disabled"
+                <button type="submit" class="btn btn-orange-sm" wire:loading.attr="disabled"
                     wire:loading.remove>Siguiente</button>
                 <div wire:loading wire:loading.class="d-flex align-items-center">
-                    {{-- <x-loading /> --}}
-                    Validando...
+                    <x-loading />
                 </div>
             </div>
             <div class="col-6 mt-5 d-flex align-items-center justify-content-end">

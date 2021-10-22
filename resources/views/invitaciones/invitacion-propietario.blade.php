@@ -9,7 +9,7 @@
                 <div class="container">
                     <div class="p-3">
                         <h1 class="text-secundary">Datos del propietario</h1>
-                        @livewire('invitaciones.invitacion-propietario')
+                        @livewire('invitaciones.invitacion-propietario',['transaccion_user' => $transaccion_user])
                     </div>
                 </div>
             </div>

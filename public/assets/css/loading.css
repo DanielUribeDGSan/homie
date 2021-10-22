@@ -51,7 +51,12 @@
 }
 
 .preloader {
-    background-color: #fff;
+    background-image: linear-gradient(
+        to top,
+        var(--bg-gris) 0%,
+        var(--bg-gris) 52%,
+        var(--bg-gris) 100%
+    );
     bottom: 0;
     left: 0;
     position: fixed;
@@ -67,8 +72,8 @@
     background-repeat: no-repeat;
     height: auto;
     position: absolute;
-    left: 60%;
-    top: 50%;
+    left: 50%;
+    top: 60%;
     transform: translate(-50%, -50%);
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
@@ -147,7 +152,27 @@
 .imgloading {
     filter: grayscale(100) contrast(0%) brightness(1.8);
 }
-
+.img-loading-logo {
+    width: 15vw;
+}
+.lottie-loading {
+    width: 550px;
+    height: 550px;
+}
+@media (max-width: 991px) {
+    .img-loading-logo {
+        width: 25vw;
+    }
+}
+@media (max-width: 767px) {
+    .img-loading-logo {
+        width: 47vw;
+    }
+    .lottie-loading {
+        width: 400px;
+        height: 400px;
+    }
+}
 /* Lineas */
 
 .lines {

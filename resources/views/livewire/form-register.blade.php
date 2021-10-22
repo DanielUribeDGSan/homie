@@ -28,8 +28,9 @@
             </div>
             <div class="col-lg-6 col-md-6 col-12 mt-2">
                 <label for="password" class="col-form-label fw-100 mt-2">Contraseña</label>
-                <input type="password" class="form-input" id="password" onkeyup="onlyLetrasNum(this)"
-                    maxlength="255" wire:model.defer="createForm.password" autocomplete="off">
+                <input type="password" class="form-input" id="password" onkeyup="verPassword(this)" maxlength="255"
+                    wire:model.defer="createForm.password" autocomplete="off">
+                <small id="verPassword"></small>
                 @if ($errors->has('createForm.password'))
                     <span>{{ $errors->first('createForm.password') }}</span>
                 @endif
@@ -50,8 +51,7 @@
                 <button type="submit" class="btn btn-orange-sm" wire:loading.attr="disabled"
                     wire:loading.remove>Registrarme</button>
                 <div wire:loading wire:loading.class="d-flex align-items-center">
-                    {{-- <x-loading /> --}}
-                    Validando...
+                    <x-loading />
                 </div>
             </div>
         </div>

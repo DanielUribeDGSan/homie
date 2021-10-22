@@ -74,7 +74,7 @@
 <body>
     <div class="main-wrapper main-wrapper-2">
 
-        {{-- <x-preload /> --}}
+        <x-preload />
 
         <x-menu-pc />
         <!-- mini cart start -->

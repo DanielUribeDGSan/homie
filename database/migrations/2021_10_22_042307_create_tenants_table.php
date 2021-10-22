@@ -17,11 +17,11 @@ class CreateTenantsTable extends Migration
             $table->id();
             $table->string('transaction')->nullable();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('reference_id');
-            $table->foreign('reference_id')->references('id')->on('tenant_references');
+            $table->foreign('reference_id')->references('id')->on('tenant_references')->onDelete('cascade');
             $table->unsignedBigInteger('roomie_id');
-            $table->foreign('roomie_id')->references('id')->on('tenant_roomies');
+            $table->foreign('roomie_id')->references('id')->on('tenant_roomies')->onDelete('cascade');
             $table->string('tipo_de_persona');
             $table->string('rfc');
             $table->date('fecha_de_nacimiento');

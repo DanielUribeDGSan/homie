@@ -27,17 +27,16 @@
                 @endif
             </div>
             <div class="col-12 mt-4">
-                <hr />
+                {{-- <hr />
                 <p class="mt-4">Opcional</p>
-                <p class="mt-2">Datos del Broker</p>
+                <p class="mt-2">Datos del Broker</p> --}}
                 {{-- @livewire('broker.datos-personales') --}}
             </div>
             <div class="col-12 mt-4">
                 <button type="submit" class="btn btn-orange-sm" wire:loading.attr="disabled"
                     wire:loading.remove>Registrar datos</button>
                 <div wire:loading wire:loading.class="d-flex align-items-center">
-                    {{-- <x-loading /> --}}
-                    Validando...
+                    <x-loading />
                 </div>
             </div>
         </div>

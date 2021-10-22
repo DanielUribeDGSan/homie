@@ -31,6 +31,7 @@ $('body').on('click', '.link_ref', function () {
     setTimeout(function () {
         $('.lines').addClass('finish');
         $(".preloader").show();
+        $(".status").show();
     }, 2000);
 
 

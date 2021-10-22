@@ -42,11 +42,19 @@ class FormRegister extends Component
         $this->validate();
 
         $user = User::create([
-            'name' => $this->createForm['name'],
-            'phone' => $this->createForm['phone'],
-            'email' => $this->createForm['email'],
-            'password' => bcrypt($this->createForm['password']),
-            'fase' => 1,
+            'name' => trim(
+                $this->createForm['name']
+            ),
+            'phone' => trim(
+                $this->createForm['phone']
+            ),
+            'email' => trim(
+                $this->createForm['email']
+            ),
+            'password' => trim(
+                bcrypt($this->createForm['password'])
+            ),
+            'fase' => 0,
         ]);
 
         if ($this->createForm['type'] == '1') {
@@ -56,7 +64,6 @@ class FormRegister extends Component
         } else if ($this->createForm['type'] == '3') {
             $user->assignRole('arendatario');
             Mail::to($this->createForm['email'])->send(new MailRegister($user, $this->createForm['password']));
-            Auth::login($user);
             $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789';
 
             $randomNumber = mt_rand(1000000, 9999999)
@@ -73,7 +80,7 @@ class FormRegister extends Component
                     'user_id' => $userRegister->id
                 ]
             );
-
+            Auth::login($user);
             return redirect()->route('arendatario.datos_propietario', $transaction);
         }
     }

@@ -393,7 +393,7 @@
                                                                     style="Margin:0;padding-top:5px;padding-bottom:5px;padding-left:30px;padding-right:30px">
                                                                     <h2
                                                                         style="Margin:0;line-height:29px;mso-line-height-rule:exactly;font-family:lato, helvetica neue, helvetica, arial, sans-serif;font-size:24px;font-style:normal;font-weight:normal;color:#111111">
-                                                                        Bienvenido {{ $user->name }}</h2>
+                                                                        Hola {{ $user->name }}</h2>
                                                                 </td>
                                                             </tr>
                                                             <tr style="border-collapse:collapse">
@@ -454,9 +454,10 @@
                                                                     style="Margin:0;padding-top:20px;padding-bottom:20px;padding-left:30px;padding-right:30px">
                                                                     <p
                                                                         style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:lato, helvetica neue, helvetica, arial, sans-serif;line-height:27px;color:#666666;font-size:18px">
-                                                                        Gracias por confiar en nosotros y apoyar esta
-                                                                        nueva plataforma, que estamos seguros
-                                                                        que sera de tu agrado.</p>
+                                                                        {{ $arendatario->name }} te ha invitado a
+                                                                        realizar un registro para la renta de un
+                                                                        departamento, da click en el link para poder
+                                                                        continuar con tu registro</p>
                                                                 </td>
                                                             </tr>
                                                             <tr style="border-collapse:collapse">
