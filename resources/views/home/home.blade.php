@@ -186,7 +186,8 @@
                         </p>
                         <div
                             class="d-flex align-items-center justify-content-lg-start justify-content-md-center justify-content-center">
-                            <a class="btn btn-yellow-lg mt-5 link_ref" title="contratar" href="">Contratar</a>
+                            <a class="btn btn-yellow-lg mt-5 link_ref" title="contratar"
+                                href="{{ route('registro.broker') }}">Contratar</a>
                         </div>
 
                     </div>
@@ -289,7 +290,8 @@
                     </div>
                 </div>
                 <div class="col-12 d-flex align-items-center justify-content-center pt-6">
-                    <a class="btn btn-orange link_ref" title="contratar" href="">Contratar</a>
+                    <a class="btn btn-orange link_ref" title="contratar"
+                        href="{{ route('registro.propietario') }}">Contratar</a>
                 </div>
             </div>
         </div>
@@ -441,7 +443,8 @@
                         </p>
                         <div
                             class="d-flex align-items-center justify-content-lg-start justify-content-md-center justify-content-center">
-                            <a class="btn btn-morado mt-5 link_ref" title="contratar" href="">Contratar</a>
+                            <a class="btn btn-morado mt-5 link_ref" title="contratar"
+                                href="{{ route('registro.inquilino') }}">Contratar</a>
                         </div>
 
                     </div>

@@ -1,22 +1,12 @@
-/* @font-face {
-    src: url("../fonts/EVERETT-JANA.OTF");
+@font-face {
+    src: url("../fonts/MabryPro.otf");
+    font-family: primaryRegular;
+}
+
+@font-face {
+    src: url("../fonts/MabryBold.otf");
     font-family: primaryBold;
 }
-
-@font-face {
-    src: url("../fonts/EVERETT-LIGHT.OTF");
-    font-family: primaryLight;
-}
-
-@font-face {
-    src: url("../fonts/EVERETT-MEDIUM.OTF");
-    font-family: primaryMedium;
-}
-
-@font-face {
-    src: url("../fonts/EVERETT-REGULAR.OTF");
-    font-family: primaryRegular;
-} */
 
 *,
 *:before,
@@ -59,7 +49,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "Montserrat" !important;
+    font-family: "primaryRegular", sans-serif !important;
     color: var(--text-color);
     margin: 0px;
     font-weight: 600;
@@ -70,7 +60,7 @@ button,
 span,
 a,
 input {
-    font-family: "Montserrat" !important;
+    font-family: "primaryRegular", sans-serif !important;
     color: var(--text-color);
     margin: 0px;
 }

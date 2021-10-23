@@ -235,7 +235,7 @@
     <script src="{{ asset('assets/js/plugins/ajax-mail.js') }}"></script>
     <script src="{{ asset('assets/js/loading.js') }}"></script>
     <script src="{{ asset('assets/js/validarInput.js') }}"></script>
-    <script src="{{ asset('assets/js/validar-registro.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/validar-registro.js') }}"></script> --}}
     <script src="{{ asset('assets/js/scroll.js') }}"></script>
 
     <script src="{{ asset('assets/js/main.js?ver=1.0.6') }}"></script>

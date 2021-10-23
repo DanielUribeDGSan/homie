@@ -1,5 +1,5 @@
 <div x-data class="mt-3">
-    <form onsubmit="return registrarFormPropietario(event)">
+    <form onsubmit="return registrarFormInquilinoAPropietario(event)">
         <div class="form-group row">
             <label for="name" class="col-12 col-form-label fw-100">Nombre completo</label>
             <div class="col-lg-12 col-md-12 col-12">
@@ -40,6 +40,58 @@
                 </div>
             </div>
         </div>
-
     </form>
+    <script>
+        const registrarFormInquilinoAPropietario = (e) => {
+            e.preventDefault();
+
+            const name = document.querySelector('#name').value;
+            const phone = document.querySelector('#phone').value;
+            const email = document.querySelector('#email').value;
+
+            if (name == '') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Ups...',
+                    html: 'El campo "<b>Nombre</b>" no puede quedar vacío',
+                    confirmButtonText: 'Aceptar',
+                });
+                return false;
+            } else if (phone == '') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Ups...',
+                    html: 'El campo "<b>Teléfono</b>" no puede quedar vacío',
+                    confirmButtonText: 'Aceptar',
+                });
+                return false;
+            } else if (phone.length < 10 || phone.length > 20) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Ups...',
+                    html: 'El número no es valido',
+                    confirmButtonText: 'Aceptar',
+                });
+                return false;
+            } else if (email == '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Ups...',
+                    html: 'El campo "<b>Email</b>" no puede quedar vacío',
+                    confirmButtonText: 'Aceptar',
+                });
+                return false;
+            } else if (!validar_email(email)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Ups...',
+                    text: 'Tu email no es valido, escribelo correctamente',
+                    confirmButtonText: 'Aceptar',
+                });
+                return false;
+            }
+
+            Livewire.emitTo('arendatario.datos-propietario', 'registrarFormulario');
+        }
+    </script>
 </div>

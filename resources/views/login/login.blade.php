@@ -8,8 +8,8 @@
             <div class="col-lg-8">
                 <div class="container">
                     <div class="p-3">
-                        <h1 class="text-secundary">Datos personales</h1>
-                        @livewire('arendatario.datos-personales')
+                        <h1 class="text-secundary">Iniciar sesión</h1>
+                        @livewire('iniciar-sesion')
                     </div>
                 </div>
             </div>

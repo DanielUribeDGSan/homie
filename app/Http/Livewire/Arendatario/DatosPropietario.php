@@ -63,7 +63,7 @@ class DatosPropietario extends Component
         );
         Mail::to($this->createForm['email'])->send(new MailInvitacionPropietario($user, $arendatario));
 
-        return redirect()->route('arendatario.datos_personales');
+        return redirect()->route('inquilino.datos_personales');
     }
 
     public function render()

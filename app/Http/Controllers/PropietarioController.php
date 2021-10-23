@@ -11,7 +11,7 @@ class PropietarioController extends Controller
         $this->middleware('auth');
     }
 
-    public function datos_arendatario()
+    public function datos_inquilino()
     {
         return view('propietario.datos-arendatario');
     }

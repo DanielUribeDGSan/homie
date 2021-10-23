@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('phone', 20);
             $table->string('password')->nullable();
             $table->integer('fase')->default(0);
+            $table->string('transaction')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();

@@ -8,8 +8,8 @@
             <div class="col-lg-8">
                 <div class="container">
                     <div class="p-3">
-                        <h1 class="text-secundary">Datos personales</h1>
-                        @livewire('arendatario.datos-personales')
+                        <h1 class="text-secundary">Registro</h1>
+                        @livewire('form-register-inquilino')
                     </div>
                 </div>
             </div>

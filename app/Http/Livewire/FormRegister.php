@@ -59,8 +59,46 @@ class FormRegister extends Component
 
         if ($this->createForm['type'] == '1') {
             $user->assignRole('broker');
+            Mail::to($this->createForm['email'])->send(new MailRegister($user, $this->createForm['password']));
+            $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789';
+
+            $randomNumber = mt_rand(1000000, 9999999)
+                . mt_rand(1000000, 9999999)
+                . $characters[rand(0, strlen($characters) - 1)];
+
+            $userRegister = User::where('email', $this->createForm['email'])->first();
+
+            $transaction = str_shuffle(strval($userRegister->id) . strval($randomNumber));
+
+            Transaction::create(
+                [
+                    'transaction' => $transaction,
+                    'user_id' => $userRegister->id
+                ]
+            );
+            Auth::login($user);
+            return redirect()->route('broker.datos_propietario_inquilino', $transaction);
         } else if ($this->createForm['type'] == '2') {
             $user->assignRole('propietario');
+            Mail::to($this->createForm['email'])->send(new MailRegister($user, $this->createForm['password']));
+            $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789';
+
+            $randomNumber = mt_rand(1000000, 9999999)
+                . mt_rand(1000000, 9999999)
+                . $characters[rand(0, strlen($characters) - 1)];
+
+            $userRegister = User::where('email', $this->createForm['email'])->first();
+
+            $transaction = str_shuffle(strval($userRegister->id) . strval($randomNumber));
+
+            Transaction::create(
+                [
+                    'transaction' => $transaction,
+                    'user_id' => $userRegister->id
+                ]
+            );
+            Auth::login($user);
+            return redirect()->route('propietario.datos_inquilino', $transaction);
         } else if ($this->createForm['type'] == '3') {
             $user->assignRole('arendatario');
             Mail::to($this->createForm['email'])->send(new MailRegister($user, $this->createForm['password']));
@@ -81,7 +119,7 @@ class FormRegister extends Component
                 ]
             );
             Auth::login($user);
-            return redirect()->route('arendatario.datos_propietario', $transaction);
+            return redirect()->route('inquilino.datos_propietario', $transaction);
         }
     }
 
