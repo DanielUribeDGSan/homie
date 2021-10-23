@@ -26,10 +26,11 @@ Route::get('/invitacion-propietario/{transaccion}', [App\Http\Controllers\WebCon
 Route::get('/iniciar-sesion', [App\Http\Controllers\WebController::class, 'iniciar_sesion'])->name('iniciar_sesion');
 
 
-// Arendatario
+// Alquilino
 Route::group(['middleware' => ['role:arendatario']], function () {
     Route::get('/datos-del-propietario/{transaccion}', [App\Http\Controllers\InquilinoController::class, 'datos_propietario'])->name('inquilino.datos_propietario');
     Route::get('/inquilino-datos-personales', [App\Http\Controllers\InquilinoController::class, 'datos_personales'])->name('inquilino.datos_personales');
+    Route::post('/inquilino-files', [InquilinoController::class, 'files'])->name('inquilino.files');
 });
 
 // Propietario

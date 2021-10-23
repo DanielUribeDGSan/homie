@@ -31,8 +31,15 @@ class IniciarSesion extends Component
         $user = User::where('email', $this->formLogin['email'])->first();
         if (!is_null($user)) {
             if (Hash::check($this->formLogin['password'], $user->password)) {
-                Auth::login($user);
+                // Auth::login($user);
                 // return redirect()->route('propietario.datos_inquilino', $transaction);
+                if ($user->hasRole('broker')) {
+                    dd('broker');
+                } else if ($user->hasRole('propietario')) {
+                    dd('propietario');
+                } else if ($user->hasRole('arendatario')) {
+                    dd('arendatario');
+                }
             } else {
                 $this->emit('errorLogin');
             }

@@ -1,25 +1,25 @@
 <div x-data class="mt-3">
     <form onsubmit="return registrarFormInquilinoAPropietario(event)">
         <div class="form-group row">
-            <label for="name" class="col-12 col-form-label fw-100">Nombre completo</label>
             <div class="col-lg-12 col-md-12 col-12">
+                <label for="name" class="col-form-label fw-100">Nombre completo</label>
                 <input type="text" class="form-input" id="name" onkeyup="onlyLetrasNum(this)" maxlength="255"
                     wire:model.defer="createForm.name" autocomplete="off">
                 @if ($errors->has('createForm.name'))
                     <span>{{ $errors->first('createForm.name') }}</span>
                 @endif
             </div>
-            <label for="email" class="col-12 col-form-label fw-100 mt-2">Correo
-                electrónico</label>
             <div class="col-lg-12 col-md-12 col-12">
+                <label for="email" class="col-form-label fw-100 mt-2">Correo
+                    electrónico</label>
                 <input type="text" class="form-input" id="email" maxlength="255" wire:model.defer="createForm.email"
                     autocomplete="off">
                 @if ($errors->has('createForm.email'))
                     <span>{{ $errors->first('createForm.email') }}</span>
                 @endif
             </div>
-            <label for="phone" class="col-12 col-form-label fw-100 mt-2">Teléfono</label>
             <div class="col-lg-12 col-md-12 col-12">
+                <label for="phone" class="col-form-label fw-100 mt-2">Teléfono</label>
                 <input type="text" class="form-input" id="phone" onkeyup="onlyNum(this)" maxlength="20"
                     wire:model.defer="createForm.phone" autocomplete="off">
                 @if ($errors->has('createForm.phone'))
@@ -27,10 +27,36 @@
                 @endif
             </div>
             <div class="col-12 mt-4">
-                {{-- <hr />
-                <p class="mt-4">Opcional</p>
-                <p class="mt-2">Datos del Broker</p> --}}
-                {{-- @livewire('broker.datos-personales') --}}
+                <hr />
+                <article>
+                    <p class="mt-4">Opcional</p>
+                    <h1 class="text-secundary">Datos del broker</h1>
+                </article>
+            </div>
+            <div class="col-lg-12 col-md-12 col-12">
+                <label for="name" class="col-form-label fw-100">Nombre completo</label>
+                <input type="text" class="form-input" id="name" onkeyup="onlyLetrasNum(this)" maxlength="255"
+                    wire:model.defer="createForm2.name" autocomplete="off">
+                @if ($errors->has('createForm2.name'))
+                    <span>{{ $errors->first('createForm2.name') }}</span>
+                @endif
+            </div>
+            <div class="col-lg-12 col-md-12 col-12">
+                <label for="email" class="col-form-label fw-100 mt-2">Correo
+                    electrónico</label>
+                <input type="text" class="form-input" id="email" maxlength="255"
+                    wire:model.defer="createForm2.email" autocomplete="off">
+                @if ($errors->has('createForm2.email'))
+                    <span>{{ $errors->first('createForm2.email') }}</span>
+                @endif
+            </div>
+            <div class="col-lg-12 col-md-12 col-12">
+                <label for="phone" class="col-form-label fw-100 mt-2">Teléfono</label>
+                <input type="text" class="form-input" id="phone" onkeyup="onlyNum(this)" maxlength="20"
+                    wire:model.defer="createForm2.phone" autocomplete="off">
+                @if ($errors->has('createForm2.phone'))
+                    <span>{{ $errors->first('createForm2.phone') }}</span>
+                @endif
             </div>
             <div class="col-12 mt-4">
                 <button type="submit" class="btn btn-orange-sm" wire:loading.attr="disabled"

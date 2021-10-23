@@ -22,6 +22,12 @@ class DatosPropietario extends Component
         'email' => "",
     ];
 
+    public $createForm2 = [
+        'name' => "",
+        'phone' => "",
+        'email' => "",
+    ];
+
     protected $rules = [
         'createForm.name' => 'required|max:255',
         'createForm.phone' => 'required|max:20',
@@ -53,7 +59,23 @@ class DatosPropietario extends Component
             ),
         ]);
 
+        if ($this->createForm2['email']) {
 
+            $user = Guest::create([
+                'name' => trim(
+                    $this->createForm2['name']
+                ),
+                'phone' => trim(
+                    $this->createForm2['phone']
+                ),
+                'email' => trim(
+                    $this->createForm2['email']
+                ),
+                'transaction' => trim(
+                    $this->transaccion_user
+                ),
+            ]);
+        }
         $transaction_user = Transaction::where('transaction', $this->transaccion_user)->first();
         $arendatario = User::where('id', $transaction_user->user_id)->first();
         $arendatario->update(
@@ -62,6 +84,10 @@ class DatosPropietario extends Component
             ]
         );
         Mail::to($this->createForm['email'])->send(new MailInvitacionPropietario($user, $arendatario));
+
+        if ($this->createForm2['email']) {
+            Mail::to($this->createForm2['email'])->send(new MailInvitacionPropietario($user, $arendatario));
+        }
 
         return redirect()->route('inquilino.datos_personales');
     }

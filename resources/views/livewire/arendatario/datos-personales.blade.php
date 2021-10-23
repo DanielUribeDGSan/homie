@@ -1,9 +1,10 @@
 <div x-data class="mt-3">
-    <form onsubmit="return registrarForm(event)">
+    <form onsubmit="return datosPersonales(event)">
         <div class="form-group row">
             <div class="col-lg-6 col-md-6 col-12 mt-3">
                 <label for="tipo_persona" class="col-form-label fw-100">Tipo de persona</label>
                 <select class="form-input" id="tipo_persona" wire:model.defer="createForm.tipo_persona">
+                    <option value="">Selecciona una opción</option>
                     <option value="Moral">Moral</option>
                     <option value="Fisica">Fisica</option>
                 </select>
@@ -39,7 +40,7 @@
                 @endif
             </div>
             <div class="col-lg-6 col-md-6 col-12 mt-3">
-                <label for="ingresos_netos" class="col-form-label fw-100">Ingresos netos</label>
+                <label for="ingresos_netos" class="col-form-label fw-100">Ingresos netos mensuales</label>
                 <input type="text" class="form-input" id="ingresos_netos" onkeyup="onlyNum(this)" maxlength="255"
                     wire:model.defer="createForm.ingresos_netos" autocomplete="off">
                 @if ($errors->has('createForm.ingresos_netos'))
@@ -49,9 +50,9 @@
             <div class="col-lg-6 col-md-6 col-12 mt-3">
                 <label for="identificacion_oficial" class="col-form-label fw-100">Identificación oficial</label>
                 <input type="file" class="form-input" id="identificacion_oficial"
-                    wire:model.defer="createForm.identificacion_oficial">
-                @if ($errors->has('createForm.identificacion_oficial'))
-                    <span>{{ $errors->first('createForm.identificacion_oficial') }}</span>
+                    wire:model.defer="identificacion_oficial">
+                @if ($errors->has('identificacion_oficial'))
+                    <span>{{ $errors->first('identificacion_oficial') }}</span>
                 @endif
             </div>
             <div class="col-lg-6 col-md-6 col-12 mt-3">
@@ -96,10 +97,10 @@
             </div>
             <div class="col-lg-6 col-md-6 col-12 mt-3">
                 <label for="documentacion" class="col-form-label fw-100">Documentación</label>
-                <input type="file" class="form-input" id="documentacion"
-                    wire:model.defer="createForm.documentacion">
-                @if ($errors->has('createForm.documentacion'))
-                    <span>{{ $errors->first('createForm.documentacion') }}</span>
+                <input type="file" class="form-input" name="documentacion[]" id="documentacion"
+                    wire:model.defer="documentacion" multiple>
+                @if ($errors->has('documentacion'))
+                    <span>{{ $errors->first('documentacion') }}</span>
                 @endif
             </div>
             <div class="col-6 mt-5">
@@ -115,6 +116,124 @@
                 </article>
             </div>
         </div>
-
     </form>
+    <script>
+        const datosPersonales = (e) => {
+            e.preventDefault();
+
+            const tipo_persona = document.querySelector('#tipo_persona').value;
+            const rfc = document.querySelector('#rfc').value;
+            const fecha_nacimiento = document.querySelector('#fecha_nacimiento').value;
+            const estado_civil = document.querySelector('#estado_civil').value;
+            const ingresos_netos = document.querySelector('#ingresos_netos').value;
+            const identificacion_oficial = document.querySelector('#identificacion_oficial').value;
+            const direccion_vivienda = document.querySelector('#direccion_vivienda').value;
+            const institucion_educativa = document.querySelector('#institucion_educativa').value;
+            const historial_crediticio = document.querySelector('#historial_crediticio').value;
+            const trabajo = document.querySelector('#trabajo').value;
+            const empresa = document.querySelector('#empresa').value;
+            const documentacion = document.querySelector('#documentacion').value;
+
+
+            if (tipo_persona == '') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Ups...',
+                    html: 'El campo "<b>Tipo de persona</b>" no puede quedar vacío',
+                    confirmButtonText: 'Aceptar',
+                });
+                return false;
+            } else if (rfc == '') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Ups...',
+                    html: 'El campo "<b>RFC</b>" no puede quedar vacío',
+                    confirmButtonText: 'Aceptar',
+                });
+                return false;
+            } else if (fecha_nacimiento == '') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Ups...',
+                    html: 'El campo "<b>Fecha de nacimiento</b>" no puede quedar vacío',
+                    confirmButtonText: 'Aceptar',
+                });
+                return false;
+            } else if (estado_civil == '') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Ups...',
+                    html: 'El campo "<b>Estado civil</b>" no puede quedar vacío',
+                    confirmButtonText: 'Aceptar',
+                });
+                return false;
+            } else if (ingresos_netos == '') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Ups...',
+                    html: 'El campo "<b>Ingresos netos mensuales</b>" no puede quedar vacío',
+                    confirmButtonText: 'Aceptar',
+                });
+                return false;
+            } else if (identificacion_oficial == '') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Ups...',
+                    html: 'El campo "<b>Identificación oficial</b>" no puede quedar vacío',
+                    confirmButtonText: 'Aceptar',
+                });
+                return false;
+            } else if (direccion_vivienda == '') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Ups...',
+                    html: 'El campo "<b>Direccion vivienda actual</b>" no puede quedar vacío',
+                    confirmButtonText: 'Aceptar',
+                });
+                return false;
+            } else if (institucion_educativa == '') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Ups...',
+                    html: 'El campo "<b>Institución Educativa</b>" no puede quedar vacío',
+                    confirmButtonText: 'Aceptar',
+                });
+                return false;
+            } else if (historial_crediticio == '') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Ups...',
+                    html: 'El campo "<b>Historial crediticio</b>" no puede quedar vacío',
+                    confirmButtonText: 'Aceptar',
+                });
+                return false;
+            } else if (trabajo == '') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Ups...',
+                    html: 'El campo "<b>Trabajo</b>" no puede quedar vacío',
+                    confirmButtonText: 'Aceptar',
+                });
+                return false;
+            } else if (empresa == '') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Ups...',
+                    html: 'El campo "<b>Nombre de la empresa</b>" no puede quedar vacío',
+                    confirmButtonText: 'Aceptar',
+                });
+                return false;
+            } else if (documentacion == '') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Ups...',
+                    html: 'El campo "<b>Documentación</b>" no puede quedar vacío',
+                    confirmButtonText: 'Aceptar',
+                });
+                return false;
+            }
+            Livewire.emitTo('arendatario.datos-personales', 'registrarFormulario');
+        }
+    </script>
+
 </div>

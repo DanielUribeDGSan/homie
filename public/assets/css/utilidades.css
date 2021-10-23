@@ -29,6 +29,9 @@
 .fw-700 {
     font-weight: 700;
 }
+.ft-md {
+    font-size: 1.3rem;
+}
 
 .text-primary {
     color: var(--primario) !important;
