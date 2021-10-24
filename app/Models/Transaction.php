@@ -9,8 +9,5 @@ class Transaction extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'user_id',
-        'transaction',
-    ];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 }

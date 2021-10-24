@@ -1,8 +1,8 @@
 <div x-data class="mt-3">
     <form onsubmit="return registrarFormInquilino(event)">
         <div class="form-group row">
-            <div class="col-lg-12 col-md-12 col-12 mt-2">
-                <label for="name" class="col-form-label fw-100">Nombre completo</label>
+            <div class="col-lg-6 col-md-6 col-12 mt-2">
+                <label for="name" class="col-form-label fw-100">Nombre</label>
                 <input type="text" class="form-input" id="name" onkeyup="onlyLetrasNum(this)" maxlength="255"
                     wire:model.defer="createForm.name" autocomplete="off">
                 @if ($errors->has('createForm.name'))
@@ -10,10 +10,18 @@
                 @endif
             </div>
             <div class="col-lg-6 col-md-6 col-12 mt-2">
+                <label for="last_name" class="col-form-label fw-100">Apellidos</label>
+                <input type="text" class="form-input" id="last_name" onkeyup="onlyLetrasNum(this)" maxlength="255"
+                    wire:model.defer="createForm.last_name" autocomplete="off">
+                @if ($errors->has('createForm.last_name'))
+                    <span>{{ $errors->first('createForm.last_name') }}</span>
+                @endif
+            </div>
+            <div class="col-lg-6 col-md-6 col-12 mt-2">
                 <label for="email" class="col-form-label fw-100 mt-2">Correo
                     electrónico</label>
-                <input type="text" class="form-input" id="email" maxlength="255" wire:model.defer="createForm.email"
-                    autocomplete="off">
+                <input type="email" class="form-input" id="email" maxlength="255"
+                    wire:model.defer="createForm.email" autocomplete="off">
                 @if ($errors->has('createForm.email'))
                     <span>{{ $errors->first('createForm.email') }}</span>
                 @endif
@@ -51,6 +59,7 @@
             e.preventDefault();
 
             const name = document.querySelector('#name').value;
+            const last_name = document.querySelector('#last_name').value;
             const phone = document.querySelector('#phone').value;
             const email = document.querySelector('#email').value;
             const password = document.querySelector('#password').value;
@@ -60,6 +69,14 @@
                     icon: 'warning',
                     title: 'Ups...',
                     html: 'El campo "<b>Nombre</b>" no puede quedar vacío',
+                    confirmButtonText: 'Aceptar',
+                });
+                return false;
+            } else if (last_name == '') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Ups...',
+                    html: 'El campo "<b>Apellidos</b>" no puede quedar vacío',
                     confirmButtonText: 'Aceptar',
                 });
                 return false;

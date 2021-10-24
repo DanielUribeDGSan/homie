@@ -140,7 +140,7 @@
 }
 .registro__img {
     width: 100%;
-    height: 100%;
+    height: auto;
 }
 @media (max-width: 991px) {
     .registro__img {

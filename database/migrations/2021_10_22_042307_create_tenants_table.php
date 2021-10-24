@@ -15,7 +15,7 @@ class CreateTenantsTable extends Migration
     {
         Schema::create('tenants', function (Blueprint $table) {
             $table->id();
-            $table->string('transaction')->nullable();
+            $table->string('transaction');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('tipo_de_persona');
@@ -29,6 +29,7 @@ class CreateTenantsTable extends Migration
             $table->string('historial_crediticio');
             $table->string('trabajo');
             $table->string('empresa');
+            $table->string('actividad_empresa');
             $table->json('documentacion');
             $table->timestamps();
         });

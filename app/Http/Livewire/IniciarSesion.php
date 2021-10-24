@@ -44,6 +44,9 @@ class IniciarSesion extends Component
                     } else if ($user->fase == 1) {
                         redirect()->route('inquilino.datos_personales');
                     } else if ($user->fase == 2) {
+                        redirect()->route('inquilino.referencias');
+                    } else if ($user->fase == 3) {
+                        redirect()->route('inquilino.roomies');
                     }
                 }
             } else {

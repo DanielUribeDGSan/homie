@@ -79,16 +79,16 @@ class DatosPropietario extends Component
             ]);
         }
         $transaction_user = Transaction::where('transaction', $this->transaccion_user)->first();
-        $arendatario = User::where('id', $transaction_user->user_id)->first();
-        $arendatario->update(
+        $inquilino = User::where('id', $transaction_user->user_id)->first();
+        $inquilino->update(
             [
                 'fase' => 1,
             ]
         );
-        Mail::to($this->createForm['email'])->send(new MailInvitacionPropietario($user, $arendatario));
+        Mail::to($this->createForm['email'])->send(new MailInvitacionPropietario($user, $inquilino));
 
         if ($this->createForm2['email']) {
-            Mail::to($this->createForm2['email'])->send(new MailInvitacionPropietario($user, $arendatario));
+            Mail::to($this->createForm2['email'])->send(new MailInvitacionPropietario($user, $inquilino));
         }
 
         return redirect()->route('inquilino.datos_personales');

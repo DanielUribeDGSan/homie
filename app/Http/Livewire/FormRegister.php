@@ -15,6 +15,7 @@ class FormRegister extends Component
 
     public $createForm = [
         'name' => "",
+        'last_name' => "",
         'phone' => "",
         'email' => "",
         'password' => "",
@@ -23,6 +24,7 @@ class FormRegister extends Component
 
     protected $rules = [
         'createForm.name' => 'required|max:255',
+        'createForm.last_name' => 'required|max:255',
         'createForm.phone' => 'required|max:20',
         'createForm.email' => 'required|max:255|unique:users,email',
         'createForm.password' => 'required|max:255',
@@ -31,6 +33,7 @@ class FormRegister extends Component
 
     protected $validationAttributes = [
         'createForm.name' => 'Nombre',
+        'createForm.last_name' => 'Apellidos',
         'createForm.phone' => 'Teléfono',
         'createForm.email' => 'Email',
         'createForm.password' => 'Contraseña',
@@ -45,6 +48,9 @@ class FormRegister extends Component
         $user = User::create([
             'name' => trim(
                 $this->createForm['name']
+            ),
+            'last_name' => trim(
+                $this->createForm['last_name']
             ),
             'phone' => trim(
                 $this->createForm['phone']

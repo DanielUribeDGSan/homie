@@ -25,21 +25,13 @@ class InquilinoController extends Controller
         return view('arendatario.datos-personales');
     }
 
-    public function files(Request $request)
+    public function referencias()
     {
-        $request->validate(['file' => 'required|image|max:2048']);
+        return view('arendatario.referencias');
+    }
 
-        if ($request->hasFile("file")) {
-            $imagen = $request->file("file");
-            $nombreimagen   = Str::slug($request->file("file")) . "." . $imagen->guessExtension();
-            $ruta = public_path('assets/images/products');
-
-            $imagen->move($ruta, $nombreimagen);
-            $imageUrl =   'products/' . $nombreimagen;
-
-            // $product->images()->create([
-            //     'url' => $imageUrl
-            // ]);
-        }
+    public function roomies()
+    {
+        return view('arendatario.roomies');
     }
 }

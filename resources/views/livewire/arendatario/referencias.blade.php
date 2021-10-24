@@ -1,5 +1,5 @@
 <div x-data class="mt-3">
-    <form onsubmit="return registrarForm(event)">
+    <form onsubmit="return referenciasForm(event)">
         <div class="form-group row">
             <div class="col-lg-6 col-md-6 col-12 mt-2">
                 <label for="name" class="col-form-label fw-100">Nombre</label>
@@ -34,46 +34,29 @@
                     <span>{{ $errors->first('createForm.phone') }}</span>
                 @endif
             </div>
-            <div class="col-lg-6 col-md-6 col-12 mt-2">
-                <label for="password" class="col-form-label fw-100 mt-2">Contraseña</label>
-                <input type="password" class="form-input" id="password" onkeyup="verPassword(this)" maxlength="255"
-                    wire:model.defer="createForm.password" autocomplete="off">
-                <small id="verPassword"></small>
-                @if ($errors->has('createForm.password'))
-                    <span>{{ $errors->first('createForm.password') }}</span>
-                @endif
-            </div>
-            <div class="col-lg-6 col-md-6 col-12 mt-2">
-                <label for="type" class="col-form-label fw-100 mt-2">Tipo de usuario</label>
-                <select class="form-input" id="type" wire:model.defer="createForm.type">
-                    <option value="" selected disabled>Selecciona un tipo de usuario</option>
-                    <option value="1">Broker</option>
-                    <option value="2">Propietario</option>
-                    <option value="3">Inquilino</option>
-                </select>
-                @if ($errors->has('createForm.type'))
-                    <span>{{ $errors->first('createForm.type') }}</span>
-                @endif
-            </div>
-            <div class="col-12 mt-4">
+            <div class="col-6 mt-5">
                 <button type="submit" class="btn btn-orange-sm" wire:loading.attr="disabled"
-                    wire:loading.remove>Registrarme</button>
+                    wire:loading.remove>Siguiente</button>
                 <div wire:loading wire:loading.class="d-flex align-items-center">
                     <x-loading />
                 </div>
             </div>
+            <div class="col-6 mt-5 d-flex align-items-center justify-content-end">
+                <article>
+                    <h1 class="text-secundary">2/3</h1>
+                </article>
+            </div>
         </div>
     </form>
     <script>
-        const registrarForm = (e) => {
+        const referenciasForm = (e) => {
             e.preventDefault();
 
             const name = document.querySelector('#name').value;
             const last_name = document.querySelector('#last_name').value;
             const phone = document.querySelector('#phone').value;
             const email = document.querySelector('#email').value;
-            const password = document.querySelector('#password').value;
-            const type = document.querySelector('#type').value;
+
 
             if (name == '') {
                 Swal.fire({
@@ -123,33 +106,9 @@
                     confirmButtonText: 'Aceptar',
                 });
                 return false;
-            } else if (password == '') {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Ups...',
-                    html: 'El campo "<b>Contraseña</b>" no puede quedar vacío',
-                    confirmButtonText: 'Aceptar',
-                });
-                return false;
-            } else if (password.length < 6) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Ups...',
-                    html: 'El campo "<b>Contraseña</b>" es invalido, por lo menos debe de tenr 6 dígitos',
-                    confirmButtonText: 'Aceptar',
-                });
-                return false;
-            } else if (type == '') {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Ups...',
-                    html: 'El campo "<b>Tipo de usuario</b>" no puede quedar vacío',
-                    confirmButtonText: 'Aceptar',
-                });
-                return false;
             }
-
-            Livewire.emitTo('form-register', 'registrarFormulario');
+            Livewire.emitTo('arendatario.referencias', 'registrarFormulario');
         }
     </script>
+
 </div>

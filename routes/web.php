@@ -30,7 +30,8 @@ Route::get('/iniciar-sesion', [App\Http\Controllers\WebController::class, 'inici
 Route::group(['middleware' => ['role:arendatario']], function () {
     Route::get('/datos-del-propietario/{transaccion}', [App\Http\Controllers\InquilinoController::class, 'datos_propietario'])->name('inquilino.datos_propietario');
     Route::get('/inquilino-datos-personales', [App\Http\Controllers\InquilinoController::class, 'datos_personales'])->name('inquilino.datos_personales');
-    Route::post('/inquilino-files', [InquilinoController::class, 'files'])->name('inquilino.files');
+    Route::get('/inquilino-referencias', [App\Http\Controllers\InquilinoController::class, 'referencias'])->name('inquilino.referencias');
+    Route::get('/inquilino-roomies', [App\Http\Controllers\InquilinoController::class, 'roomies'])->name('inquilino.roomies');
 });
 
 // Propietario

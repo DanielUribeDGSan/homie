@@ -9,11 +9,5 @@ class Guest extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name',
-        'email',
-        'phone',
-        'transaction',
-        'type',
-    ];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 }
