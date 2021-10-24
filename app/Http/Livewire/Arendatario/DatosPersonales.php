@@ -2,10 +2,12 @@
 
 namespace App\Http\Livewire\Arendatario;
 
+use App\Models\Tenant;
 use Livewire\Component;
 
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class DatosPersonales extends Component
 {
@@ -16,6 +18,7 @@ class DatosPersonales extends Component
     public $identificacion_oficial;
     public $documentacion = [];
     public $transaccion_user;
+
 
     public $createForm = [
         'tipo_persona' => "",
@@ -38,13 +41,11 @@ class DatosPersonales extends Component
         'createForm.fecha_nacimiento' => 'required|max:255',
         'createForm.estado_civil' => 'required|max:255',
         'createForm.ingresos_netos' => 'required|max:255',
-        'createForm.identificacion_oficial' => 'required|max:255',
         'createForm.direccion_vivienda' => 'required|max:255',
         'createForm.institucion_educativa' => 'required|max:255',
         'createForm.historial_crediticio' => 'required|max:255',
         'createForm.trabajo' => 'required|max:255',
         'createForm.empresa' => 'required|max:255',
-        'createForm.documentacion' => 'required|max:255',
     ];
 
     protected $validationAttributes = [
@@ -64,14 +65,57 @@ class DatosPersonales extends Component
 
     public function registrarFormulario()
     {
+
         $rules['identificacion_oficial'] = 'required';
         $rules['documentacion'] = 'required';
-
+        $this->validate();
         $this->createForm['identificacion_oficial'] = $this->identificacion_oficial->store('alquilino/identificacion');
+        $documentos = array();
 
         foreach ($this->documentacion as $doc) {
-            $doc->store('alquilino/documentos');
+            $documentos[] = $doc->store('alquilino/documentos');
         }
+
+
+        $inquilino = Tenant::create([
+            'transaction' => Auth::user()->transaction,
+            'user_id' => Auth::user()->id,
+            'tipo_de_persona' => trim(
+                $this->createForm['tipo_persona']
+            ),
+            'rfc' => trim(
+                $this->createForm['rfc']
+            ),
+            'fecha_de_nacimiento' => trim(
+                $this->createForm['fecha_nacimiento']
+            ),
+            'estado_civil' => trim(
+                $this->createForm['estado_civil']
+            ),
+            'ingresos_netos' => trim(
+                $this->createForm['ingresos_netos']
+            ),
+            'identificacion_oficial' => trim(
+                $this->createForm['identificacion_oficial']
+            ),
+            'direccion_vivienda_actual' => trim(
+                $this->createForm['direccion_vivienda']
+            ),
+            'institucion_educativa' => trim(
+                $this->createForm['institucion_educativa']
+            ),
+            'historial_crediticio' => trim(
+                $this->createForm['historial_crediticio']
+            ),
+            'trabajo' => trim(
+                $this->createForm['trabajo']
+            ),
+            'empresa' => trim(
+                $this->createForm['empresa']
+            ),
+            'documentacion' => json_encode($documentos),
+
+        ]);
     }
 
     public function render()

@@ -14,5 +14,6 @@ class Guest extends Model
         'email',
         'phone',
         'transaction',
+        'type',
     ];
 }

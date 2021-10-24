@@ -38,7 +38,13 @@ class IniciarSesion extends Component
                 } else if ($user->hasRole('propietario')) {
                     dd('propietario');
                 } else if ($user->hasRole('arendatario')) {
-                    dd('arendatario');
+                    Auth::login($user);
+                    if ($user->fase == 0) {
+                        redirect()->route('inquilino.datos_propietario', $user->transaction);
+                    } else if ($user->fase == 1) {
+                        redirect()->route('inquilino.datos_personales');
+                    } else if ($user->fase == 2) {
+                    }
                 }
             } else {
                 $this->emit('errorLogin');

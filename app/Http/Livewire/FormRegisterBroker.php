@@ -67,6 +67,11 @@ class FormRegisterBroker extends Component
 
         $transaction = str_shuffle(strval($userRegister->id) . strval($randomNumber));
 
+        $userRegister->update(
+            [
+                'transaction' => $transaction,
+            ]
+        );
         Transaction::create(
             [
                 'transaction' => $transaction,

@@ -14,7 +14,7 @@
             </div>
             <div class="col-lg-6 col-md-6 col-12 mt-3">
                 <label for="rfc" class="col-form-label fw-100">RFC</label>
-                <input type="text" class="form-input" id="rfc" onkeyup="onlyLetrasNum(this)" maxlength="255"
+                <input type="text" class="form-input" id="rfc" onkeyup="onlyLetrasNum(this)" maxlength="13"
                     wire:model.defer="createForm.rfc" autocomplete="off">
                 @if ($errors->has('createForm.rfc'))
                     <span>{{ $errors->first('createForm.rfc') }}</span>
@@ -31,6 +31,7 @@
             <div class="col-lg-6 col-md-6 col-12 mt-3">
                 <label for="estado_civil" class="col-form-label fw-100">Estado civil</label>
                 <select class="form-input" id="estado_civil" wire:model.defer="createForm.estado_civil">
+                    <option value="">Selecciona una opción</option>
                     <option value="Soltero">Soltero</option>
                     <option value="Casado">Casado</option>
                     <option value="Otro">Otro</option>

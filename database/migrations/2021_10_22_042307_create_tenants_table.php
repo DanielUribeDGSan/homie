@@ -18,12 +18,8 @@ class CreateTenantsTable extends Migration
             $table->string('transaction')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('reference_id');
-            $table->foreign('reference_id')->references('id')->on('tenant_references')->onDelete('cascade');
-            $table->unsignedBigInteger('roomie_id');
-            $table->foreign('roomie_id')->references('id')->on('tenant_roomies')->onDelete('cascade');
             $table->string('tipo_de_persona');
-            $table->string('rfc');
+            $table->string('rfc', 13);
             $table->date('fecha_de_nacimiento');
             $table->string('estado_civil');
             $table->string('ingresos_netos');
@@ -33,7 +29,7 @@ class CreateTenantsTable extends Migration
             $table->string('historial_crediticio');
             $table->string('trabajo');
             $table->string('empresa');
-            $table->string('documentacion');
+            $table->json('documentacion');
             $table->timestamps();
         });
     }

@@ -57,6 +57,7 @@ class DatosPropietario extends Component
             'transaction' => trim(
                 $this->transaccion_user
             ),
+            'type' => 'propietario',
         ]);
 
         if ($this->createForm2['email']) {
@@ -74,6 +75,7 @@ class DatosPropietario extends Component
                 'transaction' => trim(
                     $this->transaccion_user
                 ),
+                'type' => 'broker',
             ]);
         }
         $transaction_user = Transaction::where('transaction', $this->transaccion_user)->first();
