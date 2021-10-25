@@ -26,10 +26,10 @@ Route::get('/iniciar-sesion', [App\Http\Controllers\WebController::class, 'inici
 Route::get('/registro-completado', [App\Http\Controllers\WebController::class, 'registro_completado'])->name('registro_completado');
 
 
-// Alquilino
+// Inquilino
 Route::group(['middleware' => ['role:arendatario']], function () {
     Route::get('/datos-del-propietario/{transaccion}', [App\Http\Controllers\InquilinoController::class, 'datos_propietario'])->name('inquilino.datos_propietario');
-    Route::get('/inquilino-datos-personales/{transaccion?}', [App\Http\Controllers\InquilinoController::class, 'datos_personales'])->name('inquilino.datos_personales');
+    Route::get('/inquilino-datos-personales', [App\Http\Controllers\InquilinoController::class, 'datos_personales'])->name('inquilino.datos_personales');
     Route::get('/inquilino-referencias', [App\Http\Controllers\InquilinoController::class, 'referencias'])->name('inquilino.referencias');
     Route::get('/inquilino-roomies', [App\Http\Controllers\InquilinoController::class, 'roomies'])->name('inquilino.roomies');
 });
@@ -37,7 +37,7 @@ Route::group(['middleware' => ['role:arendatario']], function () {
 // Propietario
 Route::group(['middleware' => ['role:propietario']], function () {
     Route::get('/datos-del-inquilino/{transaccion}', [App\Http\Controllers\PropietarioController::class, 'datos_inquilino'])->name('propietario.datos_inquilino');
-    Route::get('/propietario-datos-personales/{transaccion?}', [App\Http\Controllers\PropietarioController::class, 'datos_personales'])->name('propietario.datos_personales');
+    Route::get('/propietario-datos-personales', [App\Http\Controllers\PropietarioController::class, 'datos_personales'])->name('propietario.datos_personales');
 });
 
 // Broker

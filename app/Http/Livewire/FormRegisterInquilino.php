@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Mail\MailRegister;
+use App\Models\Guest;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +13,7 @@ use Livewire\Component;
 class FormRegisterInquilino extends Component
 {
     protected $listeners = ['registrarFormulario'];
+    public $transaccion_user, $email_user;
 
     public $createForm = [
         'name' => "",
@@ -36,6 +38,20 @@ class FormRegisterInquilino extends Component
         'createForm.email' => 'Email',
         'createForm.password' => 'Contraseña',
     ];
+
+    public function mount()
+    {
+        if ($this->transaccion_user && $this->email_user) {
+
+            $invitado = Guest::where('transaction', $this->transaccion_user)->where('email', $this->email_user)->first();
+
+            $this->createForm['name'] = $invitado->name;
+            $this->createForm['last_name'] = $invitado->last_name;
+            $this->createForm['email'] = $invitado->email;
+            $this->createForm['phone'] = $invitado->phone;
+        }
+    }
+
 
     public function registrarFormulario()
     {
@@ -74,20 +90,41 @@ class FormRegisterInquilino extends Component
 
         $transaction = strval($userRegister->id) . str_shuffle(strval($randomNumber));
 
-        $userRegister->update(
-            [
-                'transaction' => $transaction,
-            ]
-        );
 
-        Transaction::create(
-            [
-                'transaction' => $transaction,
-                'user_id' => $userRegister->id
-            ]
-        );
+        if ($this->transaccion_user && $this->email_user) {
+            $userRegister->update(
+                [
+                    'transaction' => $this->transaccion_user,
+                ]
+            );
+        } else {
+            $userRegister->update(
+                [
+                    'transaction' => $transaction,
+                ]
+            );
+
+            Transaction::create(
+                [
+                    'transaction' => $transaction,
+                    'user_id' => $userRegister->id
+                ]
+            );
+        }
+
+
         Auth::login($user);
-        return redirect()->route('inquilino.datos_propietario', $transaction);
+
+        if ($this->transaccion_user && $this->email_user) {
+            $userRegister->update(
+                [
+                    'fase' => 1,
+                ]
+            );
+            return redirect()->route('inquilino.datos_personales');
+        } else {
+            return redirect()->route('inquilino.datos_propietario', $transaction);
+        }
     }
     public function render()
     {

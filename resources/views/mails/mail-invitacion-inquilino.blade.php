@@ -466,7 +466,7 @@
                                                                     style="Margin:0;padding-left:10px;padding-right:10px;padding-top:35px;padding-bottom:35px">
                                                                     <span class="es-button-border"
                                                                         style="border-style:solid;border-color:#FFA73B;background:#f5b335;border-width:1px;display:inline-block;border-radius:2px;width:auto"><a
-                                                                            href="{{ route('registro.inquilino', $user->transaction) }}"
+                                                                            href="{{ route('registro.inquilino', [$user->transaction, $email]) }}"
                                                                             class="es-button es-button-1"
                                                                             target="_blank"
                                                                             style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:20px;border-style:solid;border-color:#f5b335;border-width:15px 30px;display:inline-block;background:#f5b335;border-radius:2px;font-family:helvetica, helvetica neue, arial, verdana, sans-serif;font-weight:normal;font-style:normal;line-height:24px;width:auto;text-align:center">Continuar

@@ -81,6 +81,12 @@ class DatosPersonales extends Component
                 $this->transaccion_user
             ),
             'type' => 'propietario',
+            'precio' => trim(
+                $this->createForm['precio']
+            ),
+            'direccion' => trim(
+                $this->createForm['direccion']
+            ),
         ]);
 
         if ($this->createForm2['email']) {

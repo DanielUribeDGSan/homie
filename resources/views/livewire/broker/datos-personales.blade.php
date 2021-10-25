@@ -210,7 +210,7 @@
                 return false;
             }
 
-            Livewire.emitTo('arendatario.datos-propietario', 'registrarFormulario');
+            Livewire.emitTo('broker.datos-personales', 'registrarFormulario');
         }
     </script>
 </div>

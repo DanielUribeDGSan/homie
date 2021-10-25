@@ -9,7 +9,8 @@
                 <div class="container">
                     <div class="p-3">
                         <h1 class="text-secundary">Registro</h1>
-                        @livewire('form-register-broker')
+                        @livewire('form-register-broker',['transaccion_user' => $transaccion_user,'email_user' =>
+                        $email_user])
                     </div>
                 </div>
             </div>

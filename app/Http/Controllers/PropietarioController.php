@@ -21,7 +21,7 @@ class PropietarioController extends Controller
                 if ($user->fase == 0) {
                     return redirect()->route('broker.datos_propietario_inquilino', $user->transaction);
                 } else if ($user->fase == 1) {
-                    return redirect()->route('broker.datos_departamento', $user->transaction);
+                    return redirect()->route('registro_completado');
                 } else if ($user->fase == 2) {
                     return redirect()->route('registro_completado');
                 }
@@ -59,7 +59,7 @@ class PropietarioController extends Controller
                 if ($user->fase == 0) {
                     return redirect()->route('broker.datos_propietario_inquilino', $user->transaction);
                 } else if ($user->fase == 1) {
-                    return redirect()->route('broker.datos_departamento', $user->transaction);
+                    return redirect()->route('registro_completado');
                 } else if ($user->fase == 2) {
                     return redirect()->route('registro_completado');
                 }

@@ -19,7 +19,7 @@ class BrokerController extends Controller
             $user = User::where('email', Auth::user()->email)->first();
             if ($user->hasRole('broker')) {
                 if ($user->fase == 1) {
-                    return redirect()->route('broker.datos_departamento', $user->transaction);
+                    return redirect()->route('registro_completado');
                 } else if ($user->fase == 2) {
                     return redirect()->route('registro_completado');
                 }

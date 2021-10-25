@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ class WebController extends Controller
                 if ($user->fase == 0) {
                     return redirect()->route('broker.datos_propietario_inquilino', $user->transaction);
                 } else if ($user->fase == 1) {
-                    return redirect()->route('broker.datos_departamento', $user->transaction);
+                    return redirect()->route('registro_completado');
                 } else if ($user->fase == 2) {
                     return redirect()->route('registro_completado');
                 }
@@ -53,6 +54,22 @@ class WebController extends Controller
 
     public function registro_broker($transaccion = "", $email = "")
     {
+        if ($transaccion) {
+            $validar_transaccion = Transaction::where('transaction', $transaccion)->first();
+
+            if (is_null($validar_transaccion)) {
+                return  redirect()->route('registro.broker');
+            }
+        }
+
+        if ($email) {
+            $validar_registro_usuario = User::where('email', $email)->first();
+
+            if (!is_null($validar_registro_usuario)) {
+                return  redirect()->route('broker.datos_propietario_inquilino', $transaccion);
+            }
+        }
+
         if (Auth::user()) {
             $user = User::where('email', Auth::user()->email)->first();
             if ($user->hasRole('broker')) {
@@ -92,15 +109,31 @@ class WebController extends Controller
         return view('registro.registro-broker', compact('transaccion_user', 'email_user'));
     }
 
-    public function registro_inquilino($transaccion = "", $email)
+    public function registro_inquilino($transaccion = "", $email = "")
     {
+        if ($transaccion) {
+            $validar_transaccion = Transaction::where('transaction', $transaccion)->first();
+
+            if (is_null($validar_transaccion)) {
+                return  redirect()->route('registro.inquilino');
+            }
+        }
+
+        if ($email) {
+            $validar_registro_usuario = User::where('email', $email)->first();
+
+            if (!is_null($validar_registro_usuario)) {
+                return  redirect()->route('inquilino.datos_personales', $transaccion);
+            }
+        }
+
         if (Auth::user()) {
             $user = User::where('email', Auth::user()->email)->first();
             if ($user->hasRole('broker')) {
                 if ($user->fase == 0) {
                     return redirect()->route('broker.datos_propietario_inquilino', $user->transaction);
                 } else if ($user->fase == 1) {
-                    return redirect()->route('broker.datos_departamento', $user->transaction);
+                    return redirect()->route('registro_completado');
                 } else if ($user->fase == 2) {
                     return redirect()->route('registro_completado');
                 }
@@ -130,18 +163,34 @@ class WebController extends Controller
         $transaccion_user = $transaccion;
         $email_user = $email;
 
-        return view('registro.registro-inquilino', compact('transaccion_user', 'email'));
+        return view('registro.registro-inquilino', compact('transaccion_user', 'email_user'));
     }
 
     public function registro_propietario($transaccion = "", $email = "")
     {
+        if ($transaccion) {
+            $validar_transaccion = Transaction::where('transaction', $transaccion)->first();
+
+            if (is_null($validar_transaccion)) {
+                return  redirect()->route('registro.propietario');
+            }
+        }
+
+        if ($email) {
+            $validar_registro_usuario = User::where('email', $email)->first();
+
+            if (!is_null($validar_registro_usuario)) {
+                return  redirect()->route('propietario.datos_personales', $transaccion);
+            }
+        }
+
         if (Auth::user()) {
             $user = User::where('email', Auth::user()->email)->first();
             if ($user->hasRole('broker')) {
                 if ($user->fase == 0) {
                     return   redirect()->route('broker.datos_propietario_inquilino', $user->transaction);
                 } else if ($user->fase == 1) {
-                    return redirect()->route('broker.datos_departamento', $user->transaction);
+                    return redirect()->route('registro_completado');
                 } else if ($user->fase == 2) {
                     return redirect()->route('registro_completado');
                 }
@@ -171,7 +220,7 @@ class WebController extends Controller
         $transaccion_user = $transaccion;
         $email_user = $email;
 
-        return view('registro.registro-propietario', compact('transaccion_user', 'email'));
+        return view('registro.registro-propietario', compact('transaccion_user', 'email_user'));
     }
 
     public function iniciar_sesion()
@@ -182,7 +231,7 @@ class WebController extends Controller
                 if ($user->fase == 0) {
                     return redirect()->route('broker.datos_propietario_inquilino', $user->transaction);
                 } else if ($user->fase == 1) {
-                    return redirect()->route('broker.datos_departamento', $user->transaction);
+                    return redirect()->route('registro_completado');
                 } else if ($user->fase == 2) {
                     return redirect()->route('registro_completado');
                 }

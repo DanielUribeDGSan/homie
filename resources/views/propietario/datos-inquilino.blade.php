@@ -11,11 +11,11 @@
                         <h1 class="text-secundary">Datos del inquilino</h1>
                         @livewire('propietario.datos-inquilino',['transaccion_user' => $transaccion_user])
 
-                        <div class="mt-5">
+                        {{-- <div class="mt-5">
                             <h1 class="text-secundary">¿No cuentas con un propietario?</h1>
                             <a class="mt-3 d-inline-block ft-md" href="https://homie.mx/h/" target="_blank">Consigue uno
                                 aquí</a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

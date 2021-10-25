@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Mail\MailRegister;
+use App\Models\Guest;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +13,7 @@ use Livewire\Component;
 class FormRegisterBroker extends Component
 {
     protected $listeners = ['registrarFormulario'];
+    public $transaccion_user, $email_user;
 
     public $createForm = [
         'name' => "",
@@ -36,6 +38,20 @@ class FormRegisterBroker extends Component
         'createForm.email' => 'Email',
         'createForm.password' => 'Contraseña',
     ];
+
+
+    public function mount()
+    {
+        if ($this->transaccion_user && $this->email_user) {
+
+            $invitado = Guest::where('transaction', $this->transaccion_user)->where('email', $this->email_user)->first();
+
+            $this->createForm['name'] = $invitado->name;
+            $this->createForm['last_name'] = $invitado->last_name;
+            $this->createForm['email'] = $invitado->email;
+            $this->createForm['phone'] = $invitado->phone;
+        }
+    }
 
     public function registrarFormulario()
     {
@@ -85,7 +101,11 @@ class FormRegisterBroker extends Component
             ]
         );
         Auth::login($user);
-        return redirect()->route('broker.datos_propietario_inquilino', $transaction);
+        if ($this->transaccion_user && $this->email_user) {
+            return redirect()->route('registro-completado');
+        } else {
+            return redirect()->route('broker.datos_propietario_inquilino', $transaction);
+        }
     }
     public function render()
     {
