@@ -28,8 +28,8 @@ class CreateTenantsTable extends Migration
             $table->string('institucion_educativa');
             $table->string('historial_crediticio');
             $table->string('trabajo');
-            $table->string('empresa');
-            $table->string('actividad_empresa');
+            $table->string('empresa')->nullable();
+            $table->string('actividad_empresa')->nullable();
             $table->json('documentacion');
             $table->timestamps();
         });

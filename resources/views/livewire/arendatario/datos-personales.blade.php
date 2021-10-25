@@ -36,7 +36,7 @@
             <div class="col-lg-6 col-md-6 col-12 mt-3">
                 <label for="estado_civil" class="col-form-label fw-100">Estado civil</label>
                 <select class="form-input" id="estado_civil" wire:model.defer="createForm.estado_civil">
-                    <option value="">Selecciona una opción</option>
+                    <option value="" selected disabled>Selecciona una opción</option>
                     <option value="Soltero">Soltero</option>
                     <option value="Casado">Casado</option>
                     <option value="Otro">Otro</option>
@@ -116,6 +116,8 @@
                     <span>{{ $errors->first('createForm.trabajo') }}</span>
                 @endif
             </div>
+        </div>
+        <div class="form-group row" wire:ignore>
             <div class="col-lg-6 col-md-6 col-12 mt-3 nombre-empresa">
                 <label for="empresa" class="col-form-label fw-100">Nombre de la empresa</label>
                 <input type="text" class="form-input" id="empresa" onkeyup="onlyLetrasNum(this)" maxlength="255"
@@ -132,11 +134,13 @@
                     <span>{{ $errors->first('createForm.actividad_empresa') }}</span>
                 @endif
             </div>
+        </div>
+        <div class="form-group row">
             <div class="col-lg-12 col-md-12 col-12 mt-3">
                 <label for="documentacion" class="col-form-label fw-100">Documentación</label>
                 <select class="form-input" id="documentacion" wire:model.defer="createForm.documentacion"
                     onchange="tipoDocumentacion()">
-                    <option value="">Selecciona una opción</option>
+                    <option value="" selected disabled>Selecciona una opción</option>
                     <option value="Comprobantes de nómina timbrados SAT (3 últimos meses)">Comprobantes de nómina
                         timbrados SAT (3 últimos meses)</option>
                     <option value="Estados de cuenta completos (3 meses)">Estados de cuenta completos (3 meses)</option>
@@ -145,6 +149,29 @@
 
                 @if ($errors->has('createForm.documentacion'))
                     <span>{{ $errors->first('createForm.documentacion') }}</span>
+                @endif
+            </div>
+        </div>
+        <div class="form-group row" wire:ignore>
+            <div class="col-lg-6 col-md-6 col-12 mt-3 estados-cuenta">
+                <label for="estado_cuenta1" class="col-form-label fw-100">Primer estado de cuenta</label>
+                <input type="file" class="form-input" id="estado_cuenta1" wire:model.defer="estado_cuenta1">
+                @if ($errors->has('estado_cuenta1'))
+                    <span>{{ $errors->first('estado_cuenta1') }}</span>
+                @endif
+            </div>
+            <div class="col-lg-6 col-md-6 col-12 mt-3 estados-cuenta">
+                <label for="estado_cuenta2" class="col-form-label fw-100">Segundo estado de cuenta</label>
+                <input type="file" class="form-input" id="estado_cuenta2" wire:model.defer="estado_cuenta2">
+                @if ($errors->has('estado_cuenta2'))
+                    <span>{{ $errors->first('estado_cuenta2') }}</span>
+                @endif
+            </div>
+            <div class="col-lg-6 col-md-6 col-12 mt-3 estados-cuenta">
+                <label for="estado_cuenta3" class="col-form-label fw-100">Tercer estado de cuenta</label>
+                <input type="file" class="form-input" id="estado_cuenta3" wire:model.defer="estado_cuenta3">
+                @if ($errors->has('estado_cuenta3'))
+                    <span>{{ $errors->first('estado_cuenta3') }}</span>
                 @endif
             </div>
             <div class="col-lg-6 col-md-6 col-12 mt-3 comprobante-nomina">
@@ -187,7 +214,7 @@
             </div>
         </div>
     </form>
-    <script>
+    <script wire:ignore>
         const datosPersonales = (e) => {
             e.preventDefault();
 
@@ -317,6 +344,18 @@
             Livewire.emitTo('arendatario.datos-personales', 'registrarFormulario');
         }
 
+        document.querySelector('.nombre-empresa').classList.add('d-none');
+        document.querySelector('.actividad-empresa').classList.add('d-none');
+
+        const documentos_nomina = document.getElementsByClassName("comprobante-nomina");
+        for (let i = 0; i < documentos_nomina.length; i++) {
+            documentos_nomina[i].classList.add('d-none');
+        }
+        const estados_cuenta = document.getElementsByClassName("estados-cuenta");
+        for (let i = 0; i < estados_cuenta.length; i++) {
+            estados_cuenta[i].classList.add('d-none');
+        }
+
         const trabajoEmpleado = () => {
             const trabajo = document.querySelector('#trabajo1').checked;
             const nombre_empresa = document.querySelector('.nombre-empresa');
@@ -327,15 +366,6 @@
                 actividad_empresa.classList.add('d-none');
                 nombre_empresa.classList.remove('d-none');
             }
-        }
-
-
-        document.querySelector('.nombre-empresa').classList.add('d-none');
-        document.querySelector('.actividad-empresa').classList.add('d-none');
-
-        const documentos_nomina = document.getElementsByClassName("comprobante-nomina");
-        for (let i = 0; i < documentos_nomina.length; i++) {
-            documentos_nomina[i].classList.add('d-none');
         }
 
         const trabajoIndependiente = () => {
@@ -358,10 +388,20 @@
                 for (let i = 0; i < documentos_nomina.length; i++) {
                     documentos_nomina[i].classList.remove('d-none');
                 }
+
+                const estados_cuenta = document.getElementsByClassName("estados-cuenta");
+                for (let i = 0; i < estados_cuenta.length; i++) {
+                    estados_cuenta[i].classList.add('d-none');
+                }
             } else if (documentacion == 'Estados de cuenta completos (3 meses)') {
                 const documentos_nomina = document.getElementsByClassName("comprobante-nomina");
                 for (let i = 0; i < documentos_nomina.length; i++) {
                     documentos_nomina[i].classList.add('d-none');
+                }
+
+                const estados_cuenta = document.getElementsByClassName("estados-cuenta");
+                for (let i = 0; i < estados_cuenta.length; i++) {
+                    estados_cuenta[i].classList.remove('d-none');
                 }
             }
         }
