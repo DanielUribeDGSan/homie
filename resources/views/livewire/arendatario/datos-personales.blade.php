@@ -1,8 +1,8 @@
 <div x-data class="mt-3">
-    <form onsubmit="return datosPersonales(event)">
+    <form onsubmit="return datosPersonales(event)" wire:ignore>
         <div class="form-group row">
             <div class="col-lg-6 col-md-6 col-12 mt-3">
-                <label for="tipo_persona" class="col-form-label fw-100">Tipo de persona</label><br />
+                <label class="col-form-label fw-100">Tipo de persona</label><br />
                 <div class="form-check form-check-inline mt-2">
                     <input class="form-check-input" type="radio" name="tipo_persona" id="tipo_persona1" value="Moral"
                         wire:model.defer="createForm.tipo_persona">
@@ -78,7 +78,7 @@
                 @endif
             </div>
             <div class="col-lg-6 col-md-6 col-12 mt-3">
-                <label for="historial_crediticio" class="col-form-label fw-100">Historial crediticio</label>
+                <label class="col-form-label fw-100">Historial crediticio</label>
                 <br />
                 <div class="form-check form-check-inline mt-2">
                     <input class="form-check-input" type="radio" name="historial_crediticio" id="historial_crediticio1"
@@ -100,7 +100,7 @@
                 @endif
             </div>
             <div class="col-lg-6 col-md-6 col-12 mt-3">
-                <label for="trabajo" class="col-form-label fw-100">Trabajo</label>
+                <label class="col-form-label fw-100">Trabajo</label>
                 <br />
                 <div class="form-check form-check-inline mt-2">
                     <input class="form-check-input" type="radio" name="trabajo" id="trabajo1" value="Empleado"
@@ -235,6 +235,12 @@
             const empresa = document.querySelector('#empresa').value;
             const actividad_empresa = document.querySelector('#actividad_empresa').value;
             const documentacion = document.querySelector('#documentacion').value;
+            const estado_cuenta1 = document.querySelector('#estado_cuenta1').value
+            const estado_cuenta2 = document.querySelector('#estado_cuenta2').value
+            const estado_cuenta3 = document.querySelector('#estado_cuenta3').value
+            const comprobante_nomina1 = document.querySelector('#comprobante_nomina1').value
+            const comprobante_nomina2 = document.querySelector('#comprobante_nomina2').value
+            const comprobante_nomina3 = document.querySelector('#comprobante_nomina3').value
 
             if (!tipo_persona && !tipo_persona2) {
                 Swal.fire({
@@ -340,6 +346,24 @@
                     confirmButtonText: 'Aceptar',
                 });
                 return false;
+            } else if (documentacion == 'Comprobantes de nómina timbrados SAT (3 últimos meses)' && !
+                comprobante_nomina1 && !comprobante_nomina2 && !comprobante_nomina3) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Ups...',
+                    html: 'Los campos "<b>Comprobantes de nómina</b>" no pueden quedar vacíos',
+                    confirmButtonText: 'Aceptar',
+                });
+                return false;
+            } else if (documentacion == 'Estados de cuenta completos (3 meses)' && !estado_cuenta1 && !estado_cuenta2 &&
+                !estado_cuenta3) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Ups...',
+                    html: 'Los campos "<b>Estados de cuenta</b>" no pueden quedar vacíos',
+                    confirmButtonText: 'Aceptar',
+                });
+                return false;
             }
             Livewire.emitTo('arendatario.datos-personales', 'registrarFormulario');
         }
@@ -393,6 +417,11 @@
                 for (let i = 0; i < estados_cuenta.length; i++) {
                     estados_cuenta[i].classList.add('d-none');
                 }
+
+                document.querySelector('#estado_cuenta1').value = "";
+                document.querySelector('#estado_cuenta2').value = "";
+                document.querySelector('#estado_cuenta3').value = "";
+
             } else if (documentacion == 'Estados de cuenta completos (3 meses)') {
                 const documentos_nomina = document.getElementsByClassName("comprobante-nomina");
                 for (let i = 0; i < documentos_nomina.length; i++) {
@@ -403,6 +432,10 @@
                 for (let i = 0; i < estados_cuenta.length; i++) {
                     estados_cuenta[i].classList.remove('d-none');
                 }
+
+                document.querySelector('#comprobante_nomina1').value = "";
+                document.querySelector('#comprobante_nomina2').value = "";
+                document.querySelector('#comprobante_nomina3').value = "";
             }
         }
     </script>

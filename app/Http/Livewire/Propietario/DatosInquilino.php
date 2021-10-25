@@ -1,17 +1,16 @@
 <?php
 
-namespace App\Http\Livewire\Arendatario;
+namespace App\Http\Livewire\Propietario;
 
 use App\Mail\MailInvitacionBroker;
-use App\Mail\MailInvitacionPropietario;
+use App\Mail\MailInvitacionInquilino;
 use App\Models\Guest;
 use App\Models\Transaction;
 use App\Models\User;
-use Livewire\Component;
 use Illuminate\Support\Facades\Mail;
+use Livewire\Component;
 
-
-class DatosPropietario extends Component
+class DatosInquilino extends Component
 {
     protected $listeners = ['registrarFormulario'];
 
@@ -65,7 +64,7 @@ class DatosPropietario extends Component
             'transaction' => trim(
                 $this->transaccion_user
             ),
-            'type' => 'propietario',
+            'type' => 'inquilino',
         ]);
 
         if ($this->createForm2['email']) {
@@ -96,17 +95,16 @@ class DatosPropietario extends Component
                 'fase' => 1,
             ]
         );
-        Mail::to($this->createForm['email'])->send(new MailInvitacionPropietario($user, $inquilino, $this->createForm['email']));
+        Mail::to($this->createForm['email'])->send(new MailInvitacionInquilino($user, $inquilino, $this->createForm['email']));
 
         if ($this->createForm2['email']) {
             Mail::to($this->createForm2['email'])->send(new MailInvitacionBroker($user, $inquilino, $this->createForm2['email']));
         }
 
-        return redirect()->route('inquilino.datos_personales');
+        return redirect()->route('propietario.datos_personales');
     }
-
     public function render()
     {
-        return view('livewire.arendatario.datos-propietario');
+        return view('livewire.propietario.datos-inquilino');
     }
 }

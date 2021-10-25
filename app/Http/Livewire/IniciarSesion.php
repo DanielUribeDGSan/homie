@@ -34,19 +34,35 @@ class IniciarSesion extends Component
                 // Auth::login($user);
                 // return redirect()->route('propietario.datos_inquilino', $transaction);
                 if ($user->hasRole('broker')) {
-                    dd('broker');
+                    Auth::login($user);
+                    if ($user->fase == 0) {
+                        return redirect()->route('broker.datos_propietario_inquilino', $user->transaction);
+                    } else if ($user->fase == 1) {
+                        return redirect()->route('broker.datos_departamento', $user->transaction);
+                    } else if ($user->fase == 2) {
+                        return redirect()->route('registro_completado');
+                    }
                 } else if ($user->hasRole('propietario')) {
-                    dd('propietario');
+                    Auth::login($user);
+                    if ($user->fase == 0) {
+                        return redirect()->route('propietario.datos_inquilino', $user->transaction);
+                    } else if ($user->fase == 1) {
+                        return redirect()->route('propietario.datos_personales', $user->transaction);
+                    } else if ($user->fase == 2) {
+                        return redirect()->route('registro_completado');
+                    }
                 } else if ($user->hasRole('arendatario')) {
                     Auth::login($user);
                     if ($user->fase == 0) {
-                        redirect()->route('inquilino.datos_propietario', $user->transaction);
+                        return redirect()->route('inquilino.datos_propietario', $user->transaction);
                     } else if ($user->fase == 1) {
-                        redirect()->route('inquilino.datos_personales');
+                        return redirect()->route('inquilino.datos_personales', $user->transaction);
                     } else if ($user->fase == 2) {
-                        redirect()->route('inquilino.referencias');
+                        return redirect()->route('inquilino.referencias');
                     } else if ($user->fase == 3) {
-                        redirect()->route('inquilino.roomies');
+                        return redirect()->route('inquilino.roomies');
+                    } else if ($user->fase == 4) {
+                        return redirect()->route('registro_completado');
                     }
                 }
             } else {

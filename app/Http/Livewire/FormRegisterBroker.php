@@ -71,7 +71,7 @@ class FormRegisterBroker extends Component
 
         $userRegister = User::where('email', $this->createForm['email'])->first();
 
-        $transaction = str_shuffle(strval($userRegister->id) . strval($randomNumber));
+        $transaction = strval($userRegister->id) . str_shuffle(strval($randomNumber));
 
         $userRegister->update(
             [

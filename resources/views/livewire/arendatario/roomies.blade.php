@@ -1,13 +1,19 @@
 <div x-data class="mt-3">
     <form onsubmit="return roomiesForm(event)">
-        <div class="form-group row">
+        <div class="form-group row" wire:ignore>
             <div class="col-lg-6 col-md-6 col-12 mt-2">
-                <label for="compartira_renta" class="col-form-label fw-100">Compartirá Renta</label>
-                <select class="form-input" id="compartira_renta" wire:model.defer="createForm.compartira_renta">
-                    <option value="">Selecciona una opción</option>
-                    <option value="Si">Si</option>
-                    <option value="No">No</option>
-                </select>
+                <label class="col-form-label fw-100">Compartirá renta</label>
+                <br />
+                <div class="form-check form-check-inline mt-2">
+                    <input class="form-check-input" type="radio" name="compartira_renta" id="compartira_renta1"
+                        value="Si" wire:model.defer="createForm.compartira_renta">
+                    <label class="form-check-label" for="compartira_renta1">Si</label>
+                </div>
+                <div class="form-check form-check-inline mt-2">
+                    <input class="form-check-input" type="radio" name="compartira_renta" id="compartira_renta2"
+                        value="No" wire:model.defer="createForm.compartira_renta">
+                    <label class="form-check-label" for="compartira_renta2">No</label>
+                </div>
                 @if ($errors->has('createForm.compartira_renta'))
                     <span>{{ $errors->first('createForm.compartira_renta') }}</span>
                 @endif
@@ -77,23 +83,94 @@
                     <span>{{ $errors->first('createForm.direccion_vivienda') }}</span>
                 @endif
             </div>
-            <div class="col-lg-6 col-md-6 col-12 mt-3">
+        </div>
+        <div class="form-group row" wire:ignore>
+            <div class="col-lg-12 col-md-12 col-12 mt-3">
                 <label for="documentacion" class="col-form-label fw-100">Documentación</label>
-                <input type="file" class="form-input" name="documentacion[]" id="documentacion"
-                    wire:model.defer="documentacion" multiple>
-                @if ($errors->has('documentacion'))
-                    <span>{{ $errors->first('documentacion') }}</span>
-                @endif
-            </div>
-            <div class="col-lg-6 col-md-6 col-12 mt-3">
-                <label for="historial_crediticio" class="col-form-label fw-100">Historial crediticio</label>
-                <input type="text" class="form-input" id="historial_crediticio" onkeyup="onlyLetrasNum(this)"
-                    maxlength="255" wire:model.defer="createForm.historial_crediticio" autocomplete="off">
-                @if ($errors->has('createForm.historial_crediticio'))
-                    <span>{{ $errors->first('createForm.historial_crediticio') }}</span>
+                <select class="form-input" id="documentacion" wire:model.defer="createForm.documentacion"
+                    onchange="tipoDocumentacion()">
+                    <option value="" selected disabled>Selecciona una opción</option>
+                    <option value="Comprobantes de nómina timbrados SAT (3 últimos meses)">Comprobantes de nómina
+                        timbrados SAT (3 últimos meses)</option>
+                    <option value="Estados de cuenta completos (3 meses)">Estados de cuenta completos (3 meses)</option>
+
+                </select>
+
+                @if ($errors->has('createForm.documentacion'))
+                    <span>{{ $errors->first('createForm.documentacion') }}</span>
                 @endif
             </div>
         </div>
+        <div class="form-group row" wire:ignore>
+            <div class="col-lg-6 col-md-6 col-12 mt-3 estados-cuenta">
+                <label for="estado_cuenta1" class="col-form-label fw-100">Primer estado de cuenta</label>
+                <input type="file" class="form-input" id="estado_cuenta1" wire:model.defer="estado_cuenta1">
+                @if ($errors->has('estado_cuenta1'))
+                    <span>{{ $errors->first('estado_cuenta1') }}</span>
+                @endif
+            </div>
+            <div class="col-lg-6 col-md-6 col-12 mt-3 estados-cuenta">
+                <label for="estado_cuenta2" class="col-form-label fw-100">Segundo estado de cuenta</label>
+                <input type="file" class="form-input" id="estado_cuenta2" wire:model.defer="estado_cuenta2">
+                @if ($errors->has('estado_cuenta2'))
+                    <span>{{ $errors->first('estado_cuenta2') }}</span>
+                @endif
+            </div>
+            <div class="col-lg-6 col-md-6 col-12 mt-3 estados-cuenta">
+                <label for="estado_cuenta3" class="col-form-label fw-100">Tercer estado de cuenta</label>
+                <input type="file" class="form-input" id="estado_cuenta3" wire:model.defer="estado_cuenta3">
+                @if ($errors->has('estado_cuenta3'))
+                    <span>{{ $errors->first('estado_cuenta3') }}</span>
+                @endif
+            </div>
+            <div class="col-lg-6 col-md-6 col-12 mt-3 comprobante-nomina">
+                <label for="comprobante_nomina1" class="col-form-label fw-100">Primer comprobante de nónima</label>
+                <input type="file" class="form-input" id="comprobante_nomina1"
+                    wire:model.defer="comprobante_nomina1">
+                @if ($errors->has('comprobante_nomina1'))
+                    <span>{{ $errors->first('comprobante_nomina1') }}</span>
+                @endif
+            </div>
+            <div class="col-lg-6 col-md-6 col-12 mt-3 comprobante-nomina">
+                <label for="comprobante_nomina2" class="col-form-label fw-100">Segundo comprobante de nónima</label>
+                <input type="file" class="form-input" id="comprobante_nomina2"
+                    wire:model.defer="comprobante_nomina2">
+                @if ($errors->has('comprobante_nomina2'))
+                    <span>{{ $errors->first('comprobante_nomina2') }}</span>
+                @endif
+            </div>
+            <div class="col-lg-6 col-md-6 col-12 mt-3 comprobante-nomina">
+                <label for="comprobante_nomina3" class="col-form-label fw-100">Tercer comprobante de nónima</label>
+                <input type="file" class="form-input" id="comprobante_nomina3"
+                    wire:model.defer="comprobante_nomina3">
+                @if ($errors->has('comprobante_nomina3'))
+                    <span>{{ $errors->first('comprobante_nomina3') }}</span>
+                @endif
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-12 mt-3" wire:ignore>
+            <label class="col-form-label fw-100">Historial crediticio</label>
+            <br />
+            <div class="form-check form-check-inline mt-2">
+                <input class="form-check-input" type="radio" name="historial_crediticio" id="historial_crediticio1"
+                    value="Tengo tarjeta de crédito" wire:model.defer="createForm.historial_crediticio">
+                <label class="form-check-label" for="historial_crediticio1">Tengo tarjeta de crédito</label>
+            </div>
+            <div class="form-check form-check-inline mt-2">
+                <input class="form-check-input" type="radio" name="historial_crediticio" id="historial_crediticio2"
+                    value="Tengo tarjeta de débito" wire:model.defer="createForm.historial_crediticio">
+                <label class="form-check-label" for="historial_crediticio2">Tengo tarjeta de débito</label>
+            </div>
+            <div class="form-check form-check-inline mt-2">
+                <input class="form-check-input" type="radio" name="historial_crediticio" id="historial_crediticio3"
+                    value="No tengo tarjetas" wire:model.defer="createForm.historial_crediticio">
+                <label class="form-check-label" for="historial_crediticio3">No tengo tarjetas</label>
+            </div>
+            @if ($errors->has('createForm.historial_crediticio'))
+                <span>{{ $errors->first('createForm.historial_crediticio') }}</span>
+            @endif
+        </div>
+
         <div class="form-group row">
             <div class="col-6 mt-5">
                 <button type="submit" class="btn btn-orange-sm" wire:loading.attr="disabled"
@@ -113,57 +190,51 @@
         const roomiesForm = (e) => {
             e.preventDefault();
 
-            const tipo_persona = document.querySelector('#tipo_persona').value;
-            const rfc = document.querySelector('#rfc').value;
-            const fecha_nacimiento = document.querySelector('#fecha_nacimiento').value;
-            const estado_civil = document.querySelector('#estado_civil').value;
-            const ingresos_netos = document.querySelector('#ingresos_netos').value;
+            const compartira_renta1 = document.querySelector('#compartira_renta1').checked;
+            const compartira_renta2 = document.querySelector('#compartira_renta2').checked;
+            const name = document.querySelector('#name').value;
+            const last_name = document.querySelector('#last_name').value;
             const identificacion_oficial = document.querySelector('#identificacion_oficial').value;
+            const email = document.querySelector('#email').value;
+            const phone = document.querySelector('#phone').value;
+            const fecha_nacimiento = document.querySelector('#fecha_nacimiento').value;
+            const rfc = document.querySelector('#rfc').value;
             const direccion_vivienda = document.querySelector('#direccion_vivienda').value;
-            const institucion_educativa = document.querySelector('#institucion_educativa').value;
-            const historial_crediticio = document.querySelector('#historial_crediticio').value;
-            const trabajo = document.querySelector('#trabajo').value;
-            const empresa = document.querySelector('#empresa').value;
             const documentacion = document.querySelector('#documentacion').value;
+            const estado_cuenta1 = document.querySelector('#estado_cuenta1').value
+            const estado_cuenta2 = document.querySelector('#estado_cuenta2').value
+            const estado_cuenta3 = document.querySelector('#estado_cuenta3').value
+            const comprobante_nomina1 = document.querySelector('#comprobante_nomina1').value
+            const comprobante_nomina2 = document.querySelector('#comprobante_nomina2').value
+            const comprobante_nomina3 = document.querySelector('#comprobante_nomina3').value
+            const historial_crediticio = document.querySelector('#historial_crediticio1').checked;
+            const historial_crediticio2 = document.querySelector('#historial_crediticio2').checked;
+            const historial_crediticio3 = document.querySelector('#historial_crediticio3').checked;
 
 
-            if (tipo_persona == '') {
+
+
+            if (!compartira_renta1 && !compartira_renta2) {
                 Swal.fire({
                     icon: 'warning',
                     title: 'Ups...',
-                    html: 'El campo "<b>Tipo de persona</b>" no puede quedar vacío',
+                    html: 'El campo "<b>Compartirá Renta</b>" no puede quedar vacío',
                     confirmButtonText: 'Aceptar',
                 });
                 return false;
-            } else if (rfc == '') {
+            } else if (name == '') {
                 Swal.fire({
                     icon: 'warning',
                     title: 'Ups...',
-                    html: 'El campo "<b>RFC</b>" no puede quedar vacío',
+                    html: 'El campo "<b>Nombre</b>" no puede quedar vacío',
                     confirmButtonText: 'Aceptar',
                 });
                 return false;
-            } else if (fecha_nacimiento == '') {
+            } else if (last_name == '') {
                 Swal.fire({
                     icon: 'warning',
                     title: 'Ups...',
-                    html: 'El campo "<b>Fecha de nacimiento</b>" no puede quedar vacío',
-                    confirmButtonText: 'Aceptar',
-                });
-                return false;
-            } else if (estado_civil == '') {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Ups...',
-                    html: 'El campo "<b>Estado civil</b>" no puede quedar vacío',
-                    confirmButtonText: 'Aceptar',
-                });
-                return false;
-            } else if (ingresos_netos == '') {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Ups...',
-                    html: 'El campo "<b>Ingresos netos mensuales</b>" no puede quedar vacío',
+                    html: 'El campo "<b>Apellidos</b>" no puede quedar vacío',
                     confirmButtonText: 'Aceptar',
                 });
                 return false;
@@ -175,43 +246,59 @@
                     confirmButtonText: 'Aceptar',
                 });
                 return false;
+            } else if (email == '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Ups...',
+                    html: 'El campo "<b>Email</b>" no puede quedar vacío',
+                    confirmButtonText: 'Aceptar',
+                });
+                return false;
+            } else if (!validar_email(email)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Ups...',
+                    text: 'Tu email no es valido, escribelo correctamente',
+                    confirmButtonText: 'Aceptar',
+                });
+                return false;
+            } else if (phone == '') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Ups...',
+                    html: 'El campo "<b>Teléfono</b>" no puede quedar vacío',
+                    confirmButtonText: 'Aceptar',
+                });
+                return false;
+            } else if (phone.length < 10 || phone.length > 20) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Ups...',
+                    html: 'El número no es valido',
+                    confirmButtonText: 'Aceptar',
+                });
+                return false;
+            } else if (fecha_nacimiento == '') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Ups...',
+                    html: 'El campo "<b>Fecha de nacimiento</b>" no puede quedar vacío',
+                    confirmButtonText: 'Aceptar',
+                });
+                return false;
+            } else if (rfc == '') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Ups...',
+                    html: 'El campo "<b>RFC</b>" no puede quedar vacío',
+                    confirmButtonText: 'Aceptar',
+                });
+                return false;
             } else if (direccion_vivienda == '') {
                 Swal.fire({
                     icon: 'warning',
                     title: 'Ups...',
                     html: 'El campo "<b>Direccion vivienda actual</b>" no puede quedar vacío',
-                    confirmButtonText: 'Aceptar',
-                });
-                return false;
-            } else if (institucion_educativa == '') {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Ups...',
-                    html: 'El campo "<b>Institución Educativa</b>" no puede quedar vacío',
-                    confirmButtonText: 'Aceptar',
-                });
-                return false;
-            } else if (historial_crediticio == '') {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Ups...',
-                    html: 'El campo "<b>Historial crediticio</b>" no puede quedar vacío',
-                    confirmButtonText: 'Aceptar',
-                });
-                return false;
-            } else if (trabajo == '') {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Ups...',
-                    html: 'El campo "<b>Trabajo</b>" no puede quedar vacío',
-                    confirmButtonText: 'Aceptar',
-                });
-                return false;
-            } else if (empresa == '') {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Ups...',
-                    html: 'El campo "<b>Nombre de la empresa</b>" no puede quedar vacío',
                     confirmButtonText: 'Aceptar',
                 });
                 return false;
@@ -223,8 +310,76 @@
                     confirmButtonText: 'Aceptar',
                 });
                 return false;
+            } else if (documentacion == 'Comprobantes de nómina timbrados SAT (3 últimos meses)' && !
+                comprobante_nomina1 && !comprobante_nomina2 && !comprobante_nomina3) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Ups...',
+                    html: 'Los campos "<b>Comprobantes de nómina</b>" no pueden quedar vacíos',
+                    confirmButtonText: 'Aceptar',
+                });
+                return false;
+            } else if (documentacion == 'Estados de cuenta completos (3 meses)' && !estado_cuenta1 && !estado_cuenta2 &&
+                !estado_cuenta3) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Ups...',
+                    html: 'Los campos "<b>Estados de cuenta</b>" no pueden quedar vacíos',
+                    confirmButtonText: 'Aceptar',
+                });
+                return false;
+            } else if (!historial_crediticio && !historial_crediticio2 && !historial_crediticio3) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Ups...',
+                    html: 'El campo "<b>Historial crediticio</b>" no puede quedar vacío',
+                    confirmButtonText: 'Aceptar',
+                });
+                return false;
             }
-            Livewire.emitTo('arendatario.datos-personales', 'registrarFormulario');
+            Livewire.emitTo('arendatario.roomies', 'registrarFormulario');
+        }
+        const documentos_nomina = document.getElementsByClassName("comprobante-nomina");
+        for (let i = 0; i < documentos_nomina.length; i++) {
+            documentos_nomina[i].classList.add('d-none');
+        }
+        const estados_cuenta = document.getElementsByClassName("estados-cuenta");
+        for (let i = 0; i < estados_cuenta.length; i++) {
+            estados_cuenta[i].classList.add('d-none');
+        }
+
+        const tipoDocumentacion = () => {
+            const documentacion = document.querySelector('#documentacion').value;
+
+            if (documentacion == 'Comprobantes de nómina timbrados SAT (3 últimos meses)') {
+                const documentos_nomina = document.getElementsByClassName("comprobante-nomina");
+                for (let i = 0; i < documentos_nomina.length; i++) {
+                    documentos_nomina[i].classList.remove('d-none');
+                }
+
+                const estados_cuenta = document.getElementsByClassName("estados-cuenta");
+                for (let i = 0; i < estados_cuenta.length; i++) {
+                    estados_cuenta[i].classList.add('d-none');
+                }
+
+                document.querySelector('#estado_cuenta1').value = "";
+                document.querySelector('#estado_cuenta2').value = "";
+                document.querySelector('#estado_cuenta3').value = "";
+            } else if (documentacion == 'Estados de cuenta completos (3 meses)') {
+                const documentos_nomina = document.getElementsByClassName("comprobante-nomina");
+                for (let i = 0; i < documentos_nomina.length; i++) {
+                    documentos_nomina[i].classList.add('d-none');
+                }
+
+                const estados_cuenta = document.getElementsByClassName("estados-cuenta");
+                for (let i = 0; i < estados_cuenta.length; i++) {
+                    estados_cuenta[i].classList.remove('d-none');
+                }
+
+                document.querySelector('#comprobante_nomina1').value = "";
+                document.querySelector('#comprobante_nomina2').value = "";
+                document.querySelector('#comprobante_nomina3').value = "";
+            }
         }
     </script>
 

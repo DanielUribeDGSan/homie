@@ -2,22 +2,6 @@
     <form onsubmit="return registrarFormInquilinoAPropietario(event)">
         <div class="form-group row">
             <div class="col-lg-6 col-md-6 col-12 mt-2">
-                <label for="precio" class="col-form-label fw-100">Precio de la propiedad</label>
-                <input type="text" class="form-input" id="precio" onkeyup="onlyNum(this)" maxlength="255"
-                    wire:model.defer="createForm.precio" autocomplete="off">
-                @if ($errors->has('createForm.precio'))
-                    <span>{{ $errors->first('createForm.precio') }}</span>
-                @endif
-            </div>
-            <div class="col-lg-6 col-md-6 col-12 mt-2">
-                <label for="direccion" class="col-form-label fw-100">Dirección</label>
-                <input type="text" class="form-input" id="direccion" onkeyup="onlyLetrasNum(this)" maxlength="255"
-                    wire:model.defer="createForm.direccion" autocomplete="off">
-                @if ($errors->has('createForm.direccion'))
-                    <span>{{ $errors->first('createForm.direccion') }}</span>
-                @endif
-            </div>
-            <div class="col-lg-6 col-md-6 col-12 mt-2">
                 <label for="name" class="col-form-label fw-100">Nombre</label>
                 <input type="text" class="form-input" id="name" onkeyup="onlyLetrasNum(this)" maxlength="255"
                     wire:model.defer="createForm.name" autocomplete="off">
@@ -53,7 +37,8 @@
             <div class="col-12 mt-4">
                 <hr />
                 <article>
-                    <h1 class="text-secundary">Datos del inquilino</h1>
+                    <p class="mt-4">Opcional</p>
+                    <h1 class="text-secundary">Datos del broker</h1>
                 </article>
             </div>
             <div class="col-lg-6 col-md-6 col-12 mt-2">
@@ -107,11 +92,6 @@
             const phone = document.querySelector('#phone').value;
             const email = document.querySelector('#email').value;
 
-            const name2 = document.querySelector('#name2').value;
-            const last_name2 = document.querySelector('#last_name2').value;
-            const phone2 = document.querySelector('#phone2').value;
-            const email2 = document.querySelector('#email2').value;
-
             if (name == '') {
                 Swal.fire({
                     icon: 'warning',
@@ -160,57 +140,9 @@
                     confirmButtonText: 'Aceptar',
                 });
                 return false;
-            } else if (name2 == '') {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Ups...',
-                    html: 'El campo "<b>Nombre</b>" del inquilino no puede quedar vacío',
-                    confirmButtonText: 'Aceptar',
-                });
-                return false;
-            } else if (last_name2 == '') {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Ups...',
-                    html: 'El campo "<b>Apellidos</b>" del inquilino no puede quedar vacío',
-                    confirmButtonText: 'Aceptar',
-                });
-                return false;
-            } else if (phone2 == '') {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Ups...',
-                    html: 'El campo "<b>Teléfono</b>" del inquilino no puede quedar vacío',
-                    confirmButtonText: 'Aceptar',
-                });
-                return false;
-            } else if (phone2.length < 10 || phone2.length > 20) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Ups...',
-                    html: 'El número del inquilino no es valido',
-                    confirmButtonText: 'Aceptar',
-                });
-                return false;
-            } else if (email2 == '') {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Ups...',
-                    html: 'El campo "<b>Email</b>" del inquilino no puede quedar vacío',
-                    confirmButtonText: 'Aceptar',
-                });
-                return false;
-            } else if (!validar_email(email2)) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Ups...',
-                    text: 'El email del inquilino no es valido, escribelo correctamente',
-                    confirmButtonText: 'Aceptar',
-                });
-                return false;
             }
 
-            Livewire.emitTo('arendatario.datos-propietario', 'registrarFormulario');
+            Livewire.emitTo('propietario.datos-inquilino', 'registrarFormulario');
         }
     </script>
 </div>

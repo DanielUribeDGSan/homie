@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class MailInvitacionPropietario extends Mailable
+class MailInvitacionInquilino extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -18,12 +18,12 @@ class MailInvitacionPropietario extends Mailable
      *
      * @return void
      */
-    public  $user, $arendatario, $email;
+    public  $user, $inquilino, $email;
 
-    public function __construct(Guest $user, User $arendatario, $email)
+    public function __construct(Guest $user, User $inquilino, $email)
     {
         $this->user = $user;
-        $this->arendatario = $arendatario;
+        $this->inquilino = $inquilino;
         $this->email = $email;
     }
 
@@ -35,7 +35,7 @@ class MailInvitacionPropietario extends Mailable
      */
     public function build()
     {
-        return $this->view('mails.mail-invitacion-propietario')->from('daniel.uribe.garcia07@gmail.com', 'Homie - Nueva invitación')
+        return $this->view('mails.mail-invitacion-inquilino')->from('daniel.uribe.garcia07@gmail.com', 'Homie - Nueva invitación')
             ->subject('Te han enviado una invitación a homie');
     }
 }

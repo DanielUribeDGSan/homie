@@ -63,15 +63,15 @@ class FormRegisterPropietario extends Component
 
         $user->assignRole('propietario');
         Mail::to($this->createForm['email'])->send(new MailRegister($user, $this->createForm['password']));
-        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789';
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
         $randomNumber = mt_rand(1000000, 9999999)
             . mt_rand(1000000, 9999999)
             . $characters[rand(0, strlen($characters) - 1)];
 
         $userRegister = User::where('email', $this->createForm['email'])->first();
+        $transaction = strval($userRegister->id) . str_shuffle(strval($randomNumber));
 
-        $transaction = str_shuffle(strval($userRegister->id) . strval($randomNumber));
         $userRegister->update(
             [
                 'transaction' => $transaction,

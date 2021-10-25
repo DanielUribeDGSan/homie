@@ -15,6 +15,22 @@ class CreateOwnersTable extends Migration
     {
         Schema::create('owners', function (Blueprint $table) {
             $table->id();
+            $table->string('transaction');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('escrituras');
+            $table->string('contrato_compra_venta');
+            $table->string('poder_notarial');
+            $table->string('comprobante_domicilio');
+            $table->string('admite_mascotas');
+            $table->string('tiene_estacionamiento');
+            $table->string('servicios');
+            $table->string('esta_amueblado');
+            $table->string('identificacion_oficial');
+            $table->string('metodo_pago');
+            $table->string('puede_facturar');
+            $table->string('precio_propiedad');
+            $table->string('direccion');
             $table->timestamps();
         });
     }

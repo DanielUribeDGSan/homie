@@ -15,104 +15,103 @@ class Roomies extends Component
 
     protected $listeners = ['registrarFormulario'];
 
-    public $identificacion_oficial;
-    public $documentacion = [];
+    public $identificacion_oficial, $documentos;
+    public $comprobante_nomina1, $comprobante_nomina2, $comprobante_nomina3;
+    public $estado_cuenta1, $estado_cuenta2, $estado_cuenta3;
 
     public $createForm = [
         'compartira_renta' => "",
-        'rfc' => "",
-        'fecha_nacimiento' => "",
-        'estado_civil' => "",
-        'ingresos_netos' => "",
+        'name' => "",
+        'last_name' => "",
         'identificacion_oficial' => "",
+        'email' => "",
+        'phone' => "",
+        'fecha_nacimiento' => "",
+        'rfc' => "",
         'direccion_vivienda' => "",
-        'institucion_educativa' => "",
-        'historial_crediticio' => "",
-        'trabajo' => "",
-        'empresa' => "",
         'documentacion' => "",
+        'historial_crediticio' => "",
     ];
 
     protected $rules = [
         'createForm.compartira_renta' => 'required|max:255',
-        'createForm.rfc' => 'required|max:13',
+        'createForm.name' => 'required|max:255',
+        'createForm.last_name' => 'required|max:255',
+        'createForm.email' => 'required|max:255',
+        'createForm.phone' => 'required|max:20',
         'createForm.fecha_nacimiento' => 'required|max:255',
-        'createForm.estado_civil' => 'required|max:255',
-        'createForm.ingresos_netos' => 'required|max:255',
+        'createForm.rfc' => 'required|max:13',
         'createForm.direccion_vivienda' => 'required|max:255',
-        'createForm.institucion_educativa' => 'required|max:255',
+        'createForm.documentacion' => 'required|max:255',
         'createForm.historial_crediticio' => 'required|max:255',
-        'createForm.trabajo' => 'required|max:255',
-        'createForm.empresa' => 'required|max:255',
     ];
 
     protected $validationAttributes = [
-        'createForm.compartira_renta' => 'Compartirá Renta',
-        'createForm.rfc' => 'RFC',
+        'createForm.compartira_renta' => 'Compartirá renta',
+        'createForm.name' => 'Nombre',
+        'createForm.last_name' => 'Apellidos',
+        'createForm.email' => 'Correo electrónico',
+        'createForm.phone' => 'Teléfono',
         'createForm.fecha_nacimiento' => 'Fecha de nacimiento',
-        'createForm.estado_civil' => 'Estado civil',
-        'createForm.ingresos_netos' => 'Ingresos netos mensuales',
-        'createForm.identificacion_oficial' => 'Identificación oficial',
+        'createForm.rfc' => 'RFC',
         'createForm.direccion_vivienda' => 'Dirección de la vivienda',
-        'createForm.institucion_educativa' => 'Institución educativa',
-        'createForm.historial_crediticio' => 'Historial crediticio',
-        'createForm.trabajo' => 'Trabajo',
-        'createForm.empresa' => 'Nombre de la empresa',
         'createForm.documentacion' => 'Documentación',
+        'createForm.historial_crediticio' => 'Historial crediticio',
     ];
 
     public function registrarFormulario()
     {
-
         $rules['identificacion_oficial'] = 'required';
-        $rules['documentacion'] = 'required';
+
         $this->validate();
-        $this->createForm['identificacion_oficial'] = $this->identificacion_oficial->store('alquilino/identificacion');
-        $documentos = array();
+        $this->createForm['identificacion_oficial'] = $this->identificacion_oficial->store('alquilino/roomie/identificacion');
 
-        foreach ($this->documentacion as $doc) {
-            $documentos[] = $doc->store('alquilino/documentos');
+        if ($this->createForm['documentacion'] == 'Comprobantes de nómina timbrados SAT (3 últimos meses)') {
+            $url_nomina1 = $this->comprobante_nomina1->store('alquilino/roomie/nomina');
+            $url_nomina2 = $this->comprobante_nomina2->store('alquilino/roomie/nomina');
+            $url_nomina3 = $this->comprobante_nomina3->store('alquilino/roomie/nomina');
+            $this->documentos = '{"estado_cuenta1":{"url":"' . $url_nomina1 . '"},"estado_cuenta2":{"url":"' . $url_nomina2 . '"},"estado_cuenta3":{"url":"' . $url_nomina3 . '"}}';
+        } else if ($this->createForm['documentacion'] == 'Estados de cuenta completos (3 meses)') {
+            $url_esatdo_cuenta1 = $this->estado_cuenta1->store('alquilino/roomie/estado_cuenta');
+            $url_esatdo_cuenta2 = $this->estado_cuenta2->store('alquilino/roomie/estado_cuenta');
+            $url_esatdo_cuenta3 = $this->estado_cuenta3->store('alquilino/roomie/estado_cuenta');
+            $this->documentos = '{"estado_cuenta1":{"url":"' . $url_esatdo_cuenta1 . '"},"estado_cuenta2":{"url":"' . $url_esatdo_cuenta2 . '"},"estado_cuenta3":{"url":"' . $url_esatdo_cuenta3 . '"}}';
         }
-
 
         $inquilino = TenantRoomie::create([
             'transaction' => Auth::user()->transaction,
             'user_id' => Auth::user()->id,
-            'tipo_de_persona' => trim(
-                $this->createForm['tipo_persona']
+            'compartira_renta' => trim(
+                $this->createForm['compartira_renta']
             ),
-            'rfc' => trim(
-                $this->createForm['rfc']
+            'name' => trim(
+                $this->createForm['name']
             ),
-            'fecha_de_nacimiento' => trim(
-                $this->createForm['fecha_nacimiento']
-            ),
-            'estado_civil' => trim(
-                $this->createForm['estado_civil']
-            ),
-            'ingresos_netos' => trim(
-                $this->createForm['ingresos_netos']
+            'last_name' => trim(
+                $this->createForm['last_name']
             ),
             'identificacion_oficial' => trim(
                 $this->createForm['identificacion_oficial']
             ),
+            'email' => trim(
+                $this->createForm['email']
+            ),
+            'phone' => trim(
+                $this->createForm['phone']
+            ),
+            'fecha_de_nacimiento' => trim(
+                $this->createForm['fecha_nacimiento']
+            ),
+            'rfc' => trim(
+                $this->createForm['rfc']
+            ),
             'direccion_vivienda_actual' => trim(
                 $this->createForm['direccion_vivienda']
             ),
-            'institucion_educativa' => trim(
-                $this->createForm['institucion_educativa']
-            ),
+            'documentacion' => $this->documentos,
             'historial_crediticio' => trim(
                 $this->createForm['historial_crediticio']
             ),
-            'trabajo' => trim(
-                $this->createForm['trabajo']
-            ),
-            'empresa' => trim(
-                $this->createForm['empresa']
-            ),
-            'documentacion' => json_encode($documentos),
-
         ]);
 
         $inquilino = User::where('id', Auth::user()->id)->first();
@@ -121,8 +120,9 @@ class Roomies extends Component
                 'fase' => 4,
             ]
         );
-        return redirect()->route('inquilino.referencias');
+        return redirect()->route('registro_completado');
     }
+
     public function render()
     {
         return view('livewire.arendatario.roomies');

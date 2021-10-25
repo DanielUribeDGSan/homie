@@ -1,15 +1,23 @@
 <div x-data class="mt-3">
     <form onsubmit="return registrarFormInquilinoAPropietario(event)">
         <div class="form-group row">
-            <div class="col-lg-12 col-md-12 col-12">
-                <label for="name" class="col-form-label fw-100">Nombre completo</label>
+            <div class="col-lg-6 col-md-6 col-12 mt-2">
+                <label for="name" class="col-form-label fw-100">Nombre</label>
                 <input type="text" class="form-input" id="name" onkeyup="onlyLetrasNum(this)" maxlength="255"
                     wire:model.defer="createForm.name" autocomplete="off">
                 @if ($errors->has('createForm.name'))
                     <span>{{ $errors->first('createForm.name') }}</span>
                 @endif
             </div>
-            <div class="col-lg-12 col-md-12 col-12">
+            <div class="col-lg-6 col-md-6 col-12 mt-2">
+                <label for="last_name" class="col-form-label fw-100">Apellidos</label>
+                <input type="text" class="form-input" id="last_name" onkeyup="onlyLetrasNum(this)" maxlength="255"
+                    wire:model.defer="createForm.last_name" autocomplete="off">
+                @if ($errors->has('createForm.last_name'))
+                    <span>{{ $errors->first('createForm.last_name') }}</span>
+                @endif
+            </div>
+            <div class="col-lg-6 col-md-6 col-12">
                 <label for="email" class="col-form-label fw-100 mt-2">Correo
                     electrónico</label>
                 <input type="text" class="form-input" id="email" maxlength="255" wire:model.defer="createForm.email"
@@ -18,7 +26,7 @@
                     <span>{{ $errors->first('createForm.email') }}</span>
                 @endif
             </div>
-            <div class="col-lg-12 col-md-12 col-12">
+            <div class="col-lg-6 col-md-6 col-12">
                 <label for="phone" class="col-form-label fw-100 mt-2">Teléfono</label>
                 <input type="text" class="form-input" id="phone" onkeyup="onlyNum(this)" maxlength="20"
                     wire:model.defer="createForm.phone" autocomplete="off">
@@ -33,26 +41,34 @@
                     <h1 class="text-secundary">Datos del broker</h1>
                 </article>
             </div>
-            <div class="col-lg-12 col-md-12 col-12">
-                <label for="name" class="col-form-label fw-100">Nombre completo</label>
-                <input type="text" class="form-input" id="name" onkeyup="onlyLetrasNum(this)" maxlength="255"
+            <div class="col-lg-6 col-md-6 col-12 mt-2">
+                <label for="name2" class="col-form-label fw-100">Nombre</label>
+                <input type="text" class="form-input" id="name2" onkeyup="onlyLetrasNum(this)" maxlength="255"
                     wire:model.defer="createForm2.name" autocomplete="off">
                 @if ($errors->has('createForm2.name'))
                     <span>{{ $errors->first('createForm2.name') }}</span>
                 @endif
             </div>
-            <div class="col-lg-12 col-md-12 col-12">
-                <label for="email" class="col-form-label fw-100 mt-2">Correo
+            <div class="col-lg-6 col-md-6 col-12 mt-2">
+                <label for="last_name2" class="col-form-label fw-100">Apellidos</label>
+                <input type="text" class="form-input" id="last_name2" onkeyup="onlyLetrasNum(this)" maxlength="255"
+                    wire:model.defer="createForm2.last_name" autocomplete="off">
+                @if ($errors->has('createForm2.last_name'))
+                    <span>{{ $errors->first('createForm2.last_name') }}</span>
+                @endif
+            </div>
+            <div class="col-lg-6 col-md-6 col-12">
+                <label for="email2" class="col-form-label fw-100 mt-2">Correo
                     electrónico</label>
-                <input type="text" class="form-input" id="email" maxlength="255"
+                <input type="text" class="form-input" id="email2" maxlength="255"
                     wire:model.defer="createForm2.email" autocomplete="off">
                 @if ($errors->has('createForm2.email'))
                     <span>{{ $errors->first('createForm2.email') }}</span>
                 @endif
             </div>
-            <div class="col-lg-12 col-md-12 col-12">
-                <label for="phone" class="col-form-label fw-100 mt-2">Teléfono</label>
-                <input type="text" class="form-input" id="phone" onkeyup="onlyNum(this)" maxlength="20"
+            <div class="col-lg-6 col-md-6 col-12">
+                <label for="phone2" class="col-form-label fw-100 mt-2">Teléfono</label>
+                <input type="text" class="form-input" id="phone2" onkeyup="onlyNum(this)" maxlength="20"
                     wire:model.defer="createForm2.phone" autocomplete="off">
                 @if ($errors->has('createForm2.phone'))
                     <span>{{ $errors->first('createForm2.phone') }}</span>
@@ -72,6 +88,7 @@
             e.preventDefault();
 
             const name = document.querySelector('#name').value;
+            const last_name = document.querySelector('#last_name').value;
             const phone = document.querySelector('#phone').value;
             const email = document.querySelector('#email').value;
 
@@ -80,6 +97,14 @@
                     icon: 'warning',
                     title: 'Ups...',
                     html: 'El campo "<b>Nombre</b>" no puede quedar vacío',
+                    confirmButtonText: 'Aceptar',
+                });
+                return false;
+            } else if (last_name == '') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Ups...',
+                    html: 'El campo "<b>Apellidos</b>" no puede quedar vacío',
                     confirmButtonText: 'Aceptar',
                 });
                 return false;
