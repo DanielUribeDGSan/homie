@@ -25,7 +25,8 @@
                                     </li>
                                     @auth
                                     @else
-                                        <li><a href="{{ route('iniciar_sesion') }}" class="link_ref">Login</a>
+                                        <li><a href="{{ route('iniciar_sesion') }}" class="link_ref">Iniciar
+                                                sesión</a>
                                         </li>
                                     @endauth
 

@@ -68,6 +68,7 @@ class DatosPersonales extends Component
 
     public function registrarFormulario()
     {
+
         $rules['identificacion_oficial'] = 'required';
 
         $this->validate();

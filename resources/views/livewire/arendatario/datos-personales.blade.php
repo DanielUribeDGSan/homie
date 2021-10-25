@@ -1,6 +1,6 @@
 <div x-data class="mt-3">
-    <form onsubmit="return datosPersonales(event)" wire:ignore>
-        <div class="form-group row">
+    <form onsubmit="return datosPersonales(event)">
+        <div class="form-group row" wire:ignore>
             <div class="col-lg-6 col-md-6 col-12 mt-3">
                 <label class="col-form-label fw-100">Tipo de persona</label><br />
                 <div class="form-check form-check-inline mt-2">
