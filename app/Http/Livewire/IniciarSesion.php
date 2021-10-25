@@ -47,7 +47,7 @@ class IniciarSesion extends Component
                     if ($user->fase == 0) {
                         return redirect()->route('propietario.datos_inquilino', $user->transaction);
                     } else if ($user->fase == 1) {
-                        return redirect()->route('propietario.datos_personales', $user->transaction);
+                        return redirect()->route('propietario.datos_personales');
                     } else if ($user->fase == 2) {
                         return redirect()->route('registro_completado');
                     }
@@ -56,7 +56,7 @@ class IniciarSesion extends Component
                     if ($user->fase == 0) {
                         return redirect()->route('inquilino.datos_propietario', $user->transaction);
                     } else if ($user->fase == 1) {
-                        return redirect()->route('inquilino.datos_personales', $user->transaction);
+                        return redirect()->route('inquilino.datos_personales');
                     } else if ($user->fase == 2) {
                         return redirect()->route('inquilino.referencias');
                     } else if ($user->fase == 3) {

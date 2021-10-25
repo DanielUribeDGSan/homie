@@ -27,7 +27,7 @@ class PropietarioController extends Controller
                 }
             } else if ($user->hasRole('propietario')) {
                 if ($user->fase == 1) {
-                    return redirect()->route('propietario.datos_personales', $user->transaction);
+                    return redirect()->route('propietario.datos_personales');
                 } else if ($user->fase == 2) {
                     return redirect()->route('registro_completado');
                 }
@@ -35,7 +35,7 @@ class PropietarioController extends Controller
                 if ($user->fase == 0) {
                     return redirect()->route('inquilino.datos_propietario', $user->transaction);
                 } else if ($user->fase == 1) {
-                    return redirect()->route('inquilino.datos_personales', $user->transaction);
+                    return redirect()->route('inquilino.datos_personales');
                 } else if ($user->fase == 2) {
                     return redirect()->route('inquilino.referencias');
                 } else if ($user->fase == 3) {
@@ -73,7 +73,7 @@ class PropietarioController extends Controller
                 if ($user->fase == 0) {
                     return redirect()->route('inquilino.datos_propietario', $user->transaction);
                 } else if ($user->fase == 1) {
-                    return redirect()->route('inquilino.datos_personales', $user->transaction);
+                    return redirect()->route('inquilino.datos_personales');
                 } else if ($user->fase == 2) {
                     return redirect()->route('inquilino.referencias');
                 } else if ($user->fase == 3) {
