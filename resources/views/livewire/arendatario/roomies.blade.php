@@ -36,7 +36,7 @@
             </div>
             <div class="col-lg-6 col-md-6 col-12 mt-2">
                 <label for="identificacion_oficial" class="col-form-label fw-100">Identificación oficial</label>
-                <input type="file" class="form-input" id="identificacion_oficial"
+                <input type="file" accept="image/*,.pdf" class="form-input" id="identificacion_oficial"
                     wire:model.defer="identificacion_oficial">
                 @if ($errors->has('identificacion_oficial'))
                     <span>{{ $errors->first('identificacion_oficial') }}</span>
@@ -104,28 +104,31 @@
         <div class="form-group row" wire:ignore>
             <div class="col-lg-6 col-md-6 col-12 mt-3 estados-cuenta">
                 <label for="estado_cuenta1" class="col-form-label fw-100">Primer estado de cuenta</label>
-                <input type="file" class="form-input" id="estado_cuenta1" wire:model.defer="estado_cuenta1">
+                <input type="file" accept="image/*,.pdf" class="form-input" id="estado_cuenta1"
+                    wire:model.defer="estado_cuenta1">
                 @if ($errors->has('estado_cuenta1'))
                     <span>{{ $errors->first('estado_cuenta1') }}</span>
                 @endif
             </div>
             <div class="col-lg-6 col-md-6 col-12 mt-3 estados-cuenta">
                 <label for="estado_cuenta2" class="col-form-label fw-100">Segundo estado de cuenta</label>
-                <input type="file" class="form-input" id="estado_cuenta2" wire:model.defer="estado_cuenta2">
+                <input type="file" accept="image/*,.pdf" class="form-input" id="estado_cuenta2"
+                    wire:model.defer="estado_cuenta2">
                 @if ($errors->has('estado_cuenta2'))
                     <span>{{ $errors->first('estado_cuenta2') }}</span>
                 @endif
             </div>
             <div class="col-lg-6 col-md-6 col-12 mt-3 estados-cuenta">
                 <label for="estado_cuenta3" class="col-form-label fw-100">Tercer estado de cuenta</label>
-                <input type="file" class="form-input" id="estado_cuenta3" wire:model.defer="estado_cuenta3">
+                <input type="file" accept="image/*,.pdf" class="form-input" id="estado_cuenta3"
+                    wire:model.defer="estado_cuenta3">
                 @if ($errors->has('estado_cuenta3'))
                     <span>{{ $errors->first('estado_cuenta3') }}</span>
                 @endif
             </div>
             <div class="col-lg-6 col-md-6 col-12 mt-3 comprobante-nomina">
                 <label for="comprobante_nomina1" class="col-form-label fw-100">Primer comprobante de nónima</label>
-                <input type="file" class="form-input" id="comprobante_nomina1"
+                <input type="file" accept="image/*,.pdf" class="form-input" id="comprobante_nomina1"
                     wire:model.defer="comprobante_nomina1">
                 @if ($errors->has('comprobante_nomina1'))
                     <span>{{ $errors->first('comprobante_nomina1') }}</span>
@@ -133,7 +136,7 @@
             </div>
             <div class="col-lg-6 col-md-6 col-12 mt-3 comprobante-nomina">
                 <label for="comprobante_nomina2" class="col-form-label fw-100">Segundo comprobante de nónima</label>
-                <input type="file" class="form-input" id="comprobante_nomina2"
+                <input type="file" accept="image/*,.pdf" class="form-input" id="comprobante_nomina2"
                     wire:model.defer="comprobante_nomina2">
                 @if ($errors->has('comprobante_nomina2'))
                     <span>{{ $errors->first('comprobante_nomina2') }}</span>
@@ -141,7 +144,7 @@
             </div>
             <div class="col-lg-6 col-md-6 col-12 mt-3 comprobante-nomina">
                 <label for="comprobante_nomina3" class="col-form-label fw-100">Tercer comprobante de nónima</label>
-                <input type="file" class="form-input" id="comprobante_nomina3"
+                <input type="file" accept="image/*,.pdf" class="form-input" id="comprobante_nomina3"
                     wire:model.defer="comprobante_nomina3">
                 @if ($errors->has('comprobante_nomina3'))
                     <span>{{ $errors->first('comprobante_nomina3') }}</span>
