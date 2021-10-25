@@ -86,6 +86,6 @@ class PropietarioController extends Controller
 
         $transaccion_user = $transaccion;
 
-        return view('propietario.datos-personales', compact('transaccion_user', 'email'));
+        return view('propietario.datos-personales', compact('transaccion_user'));
     }
 }

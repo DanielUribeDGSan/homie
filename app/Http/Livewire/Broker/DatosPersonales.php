@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Broker;
 
 use App\Mail\MailInvitacionInquilino;
 use App\Mail\MailInvitacionPropietario;
+use App\Mail\MailProcesoTerminado;
 use App\Models\Guest;
 use App\Models\Transaction;
 use App\Models\User;
@@ -121,6 +122,7 @@ class DatosPersonales extends Component
 
         Mail::to($this->createForm2['email'])->send(new MailInvitacionInquilino($user, $inquilino, $this->createForm2['email']));
 
+        Mail::to($this->createForm['email'])->send(new MailProcesoTerminado($inquilino));
 
         return redirect()->route('registro_completado');
     }

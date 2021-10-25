@@ -2,12 +2,16 @@
 
 namespace App\Http\Livewire\Propietario;
 
+use App\Mail\MailProcesoTerminado;
+use App\Mail\MailProcesoTerminadoPropietario;
+use App\Models\Guest;
 use App\Models\Owner;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class DatosPersonales extends Component
 {
@@ -56,6 +60,20 @@ class DatosPersonales extends Component
         'createForm.direccion' => "Dirección",
     ];
 
+    public function mount()
+    {
+
+
+        $invitado = Guest::where('transaction', Auth::user()->transaction)->first();
+        if (!is_null($invitado)) {
+
+            if ($invitado->precio && $invitado->direccion) {
+                $this->createForm['precio'] = $invitado->precio;
+                $this->createForm['direccion'] = $invitado->direccion;
+            }
+        }
+    }
+
     public function registrarFormulario()
     {
         $rules['escrituras'] = 'required';
@@ -71,7 +89,7 @@ class DatosPersonales extends Component
         $this->createForm['comprobante_domicilio'] = $this->comprobante_domicilio->store('propietario/comprobante_domicilio');
         $this->createForm['identificacion_oficial'] = $this->identificacion_oficial->store('propietario/identificacion_oficial');
 
-        $inquilino = Owner::create([
+        $propietario = Owner::create([
             'transaction' => Auth::user()->transaction,
             'user_id' => Auth::user()->id,
             'escrituras' => trim(
@@ -115,12 +133,23 @@ class DatosPersonales extends Component
             ),
         ]);
 
-        $inquilino = User::where('id', Auth::user()->id)->first();
-        $inquilino->update(
+        $user = User::where('id', Auth::user()->id)->first();
+        $user->update(
             [
                 'fase' => 2,
             ]
         );
+        Mail::to($this->createForm['email'])->send(new MailProcesoTerminado($user));
+
+        $user_invitacion = User::where('transaction', Auth::user()->transaction)->first();
+        if (!is_null($user_invitacion)) {
+            if ($user_invitacion->hasRole('broker')) {
+                Mail::to($this->createForm['email'])->send(new MailProcesoTerminadoPropietario($user_invitacion, Auth::user()->name, Auth::user()->last_name));
+            }
+            if ($user_invitacion->hasRole('arendatario')) {
+                Mail::to($this->createForm['email'])->send(new MailProcesoTerminadoPropietario($user_invitacion, Auth::user()->name, Auth::user()->last_name));
+            }
+        }
         return redirect()->route('registro_completado');
     }
 

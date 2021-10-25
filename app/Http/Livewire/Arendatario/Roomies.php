@@ -2,12 +2,15 @@
 
 namespace App\Http\Livewire\Arendatario;
 
+use App\Mail\MailProcesoTerminado;
+use App\Mail\MailProcesoTerminadoInquilino;
 use App\Models\TenantRoomie;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class Roomies extends Component
 {
@@ -114,12 +117,24 @@ class Roomies extends Component
             ),
         ]);
 
-        $inquilino = User::where('id', Auth::user()->id)->first();
-        $inquilino->update(
+        $user = User::where('id', Auth::user()->id)->first();
+        $user->update(
             [
                 'fase' => 4,
             ]
         );
+        Mail::to($this->createForm['email'])->send(new MailProcesoTerminado($user));
+
+        $user_invitacion = User::where('transaction', Auth::user()->transaction)->first();
+        if (!is_null($user_invitacion)) {
+            if ($user_invitacion->hasRole('broker')) {
+                Mail::to($this->createForm['email'])->send(new MailProcesoTerminadoInquilino($user_invitacion, Auth::user()->name, Auth::user()->last_name));
+            }
+            if ($user_invitacion->hasRole('propietario')) {
+                Mail::to($this->createForm['email'])->send(new MailProcesoTerminadoInquilino($user_invitacion, Auth::user()->name, Auth::user()->last_name));
+            }
+        }
+
         return redirect()->route('registro_completado');
     }
 
